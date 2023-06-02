@@ -42,7 +42,7 @@ import MapIcon from '@mui/icons-material/Map';
             <Link to="#"><Button sx={{ color: "#6C1444" }}>Login</Button></Link>
             <Link to="#"><Button sx={{ color: "white" }}>Register</Button></Link>
             <Link to="#"><Button sx={{ color: "white" }}>Overview</Button></Link>
-            <Link to="#"><Button sx={{ color: "white" }}>Dentists</Button></Link>
+            <Link to="/dentists"><Button sx={{ color: "white" }}>Dentists</Button></Link>
             <Link to="#"><Button sx={{ color: "white" }}>Patients</Button></Link>
               </Stack>
                     </Box>
