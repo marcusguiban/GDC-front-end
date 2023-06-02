@@ -1,13 +1,14 @@
 
 import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography, Stack} from "@mui/material";
-  import MenuIcon from "@mui/icons-material/Menu";
-  import { useState } from "react";
-  import Logo from "../../images/GDC-hom2.jpg";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
+import Logo from "../../images/navbar-logo.jpg";
 import { Link } from "react-router-dom";
 import ButtonGroup from '@mui/material/ButtonGroup';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MapIcon from '@mui/icons-material/Map';
+
 
   
   export const NavbarMUI = () => {
@@ -31,18 +32,18 @@ import MapIcon from '@mui/icons-material/Map';
             <Box sx={{ mr: 1, display: { xs: "none", md: "flex" } }}>
             <img src={Logo} width="100" height="100" alt="post"></img>
             </Box>
+
         <Typography variant="h6" noWrap component="a"  sx={{ color: "white", textDecoration: "none", px:1, display: { xs: "none", md: "flex" },}}> 
         <Link to="/" style={{ color: 'inherit', textDecoration: 'none'}}>Guiban Dental Clinic</Link> 
         </Typography>
             
-            <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: 'center'}}>
+            <Box sx={{ display: { xs: "none", md: "flex" , justifyContent:'center'}}}>
               <Stack direction={"row"} spacing={2}>
-              <Link to="/login"><Button sx={{ color: "white" }} >Login</Button></Link>
-            <Link to="/register"><Button sx={{ color: "white" }}>Register</Button></Link>
-            <Link to="/Overview"><Button sx={{ color: "white" }}>Overview</Button></Link>
-            <Link to="/dentists"><Button sx={{ color: "white" }}>Dentists</Button></Link>
-            <Link to="/patients"><Button sx={{ color: "white" }}>Patients</Button></Link>
-            <Link to="/appointment/new"><Button sx={{ color: "white" }}>Set An Appointment</Button></Link>
+            <Link to="#"><Button sx={{ color: "#6C1444" }}>Login</Button></Link>
+            <Link to="#"><Button sx={{ color: "white" }}>Register</Button></Link>
+            <Link to="#"><Button sx={{ color: "white" }}>Overview</Button></Link>
+            <Link to="#"><Button sx={{ color: "white" }}>Dentists</Button></Link>
+            <Link to="#"><Button sx={{ color: "white" }}>Patients</Button></Link>
               </Stack>
                     </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
