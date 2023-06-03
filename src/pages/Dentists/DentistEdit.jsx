@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Typography, Box, Button, Stack, TextField } from "@mui/material"
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
+import InputAdornment from '@mui/material/InputAdornment';
 
 const DentistEdit = () => {
   const { id } = useParams();
@@ -87,11 +88,12 @@ password: " "
           </Stack>
           <Stack>
             <Stack direction={"row"} spacing={4} justifyContent={"center"} >
-            <TextField helperText="Contact Number" variant="standard" type="number"   name="contact_number" onChange={handleChanged} value={dentists.contact_number}/>
-            <TextField helperText="Age" variant="standard" type="number"   name="age" onChange={handleChanged} value={dentists.age}/>
-            <TextField helperText="PRC Number" variant="standard" type="number"   name="prc_number" onChange={handleChanged} value={dentists.prc_number}/>
-            <TextField helperText="PTR Number" variant="standard" type="number "   name="ptr_number" onChange={handleChanged} value={dentists.ptr_number}/>
-            <TextField helperText="PTR Number" variant="standard" type="number "   name="ptr_number" onChange={handleChanged} value={dentists.ptr_number}/>
+            <TextField helperText="Contact Number" variant="standard" type="number" name="contact_number" onChange={handleChanged} 
+          InputProps={{startAdornment: <InputAdornment position="start">+63</InputAdornment>,}}
+          value={dentists.contact_number}/>
+            <TextField helperText="Age" variant="standard" type="number" name="age" onChange={handleChanged} value={dentists.age}/>
+            <TextField helperText="PRC Number" variant="standard" type="number" name="prc_number" onChange={handleChanged} value={dentists.prc_number}/>
+            <TextField helperText="PTR Number" variant="standard" type="number" name="ptr_number" onChange={handleChanged} value={dentists.ptr_number}/>
             <TextField helperText="Branch" variant="standard" type="text"   name="branches" onChange={handleChanged} value={dentists.branches}/>
             </Stack>
             <Stack direction={"row"} spacing={4} justifyContent={"center"} >

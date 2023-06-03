@@ -101,7 +101,7 @@ const DentistsView = () => {
         <Typography variant="h6" >Contact Number:</Typography>
         </Stack>
         <Stack px={10} >
-        <Typography variant="h6" >{dentists.contact_number}</Typography>
+        <Typography variant="h6" >+63 {dentists.contact_number}</Typography>
         </Stack>
       </Stack>
       <Stack direction={"row"} >

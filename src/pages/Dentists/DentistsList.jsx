@@ -73,7 +73,7 @@ const DentistList = () => {
             >
               <TableCell >{dentists.name}</TableCell>
               <TableCell >{dentists.email}</TableCell>
-              <TableCell >{dentists.contact_number}</TableCell>
+              <TableCell >+63 {dentists.contact_number}</TableCell>
               <TableCell >{dentists.age}</TableCell>
               <TableCell >{dentists.prc_number}</TableCell>
               <TableCell >{dentists.ptr_number}</TableCell>

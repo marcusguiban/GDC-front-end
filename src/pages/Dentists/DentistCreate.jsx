@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../../contexts/AuthContext";
-import { Typography, Box, Button, Stack, Container, TextField } from "@mui/material"
+import { Typography, Box, Button, Stack, Container, TextField, MenuItem } from "@mui/material"
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
+import InputAdornment from '@mui/material/InputAdornment';
 const DentistCreate = () => {
   const [dentists, setDentists] = useState({
   });
@@ -64,19 +65,30 @@ const DentistCreate = () => {
           <Stack direction={"column"} spacing={8} align="center" sx={{pt:10}}>
               <Stack>
                 <Stack direction={"row"} spacing={4} justifyContent={"center"} >
-                <TextField helperText="Full Name" variant="standard" type="text" required  name="name" onChange={handleChanged} value={dentists.name}/>
+                <TextField helperText="Full Name" variant="standard" type="text" required name="name" onChange={handleChanged} value={dentists.name}/>
                 <TextField helperText="Email" variant="standard" type="email" name="email" onChange={handleChanged} value={dentists.email}/>
                 <TextField helperText="Password" variant="standard" type="password" name="password" onChange={handleChanged} value={dentists.password}/>
 
-                <TextField helperText="Contact Number" variant="standard" type="number" required  name="contact_number" onChange={handleChanged} value={dentists.contact_number}/>
+                <TextField helperText="Contact Number" variant="standard" type="number" inputProps={{ maxLength: 10}} required name="contact_number" onChange={handleChanged} value={dentists.contact_number}
+                          InputProps={{startAdornment: <InputAdornment position="start">+63</InputAdornment>,}}
+                />
                 </Stack>
               </Stack>
               <Stack>
                 <Stack direction={"row"} spacing={4} justifyContent={"center"} >
                 <TextField helperText="Age" variant="standard" type="number" required  name="age" onChange={handleChanged} value={dentists.age}/>
                 <TextField helperText="PRC Number" variant="standard" type="number" required  name="prc_number" onChange={handleChanged} value={dentists.prc_number}/>
-                <TextField helperText="PTR Number" variant="standard" type="number " required  name="ptr_number" onChange={handleChanged} value={dentists.ptr_number}/>
-                <TextField helperText="Branch" variant="standard" type="text" required  name="branches" onChange={handleChanged} value={dentists.branches}/>
+                <TextField helperText="PTR Number" variant="standard" type="number" required  name="ptr_number" onChange={handleChanged} value={dentists.ptr_number}/>
+                <TextField helperText="Select Location" select variant="standard" type="text" required  name="branches" onChange={handleChanged} value={dentists.branches}>
+                                <MenuItem value="Carmona">Carmona</MenuItem>
+                                <MenuItem value="Molino">Molino</MenuItem>
+                                <MenuItem value="Carmona">Carmona</MenuItem>
+                                <MenuItem value="Rosario">Rosario</MenuItem>
+                                <MenuItem value="Dasmarinas">Dasmarinas</MenuItem>
+                                <MenuItem value="Las Pinas">Las Pinas</MenuItem>
+                            </TextField>
+
+
 
                 </Stack>
               </Stack>
