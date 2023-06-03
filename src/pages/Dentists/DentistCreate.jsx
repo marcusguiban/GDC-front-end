@@ -12,9 +12,17 @@ const DentistCreate = () => {
   const navigate = useNavigate();
 //   const { token } = useAuth();
 
-  const handleChanged = (e) => {
-    setDentists((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+const handleChanged = (e) => {
+  const { name, value } = e.target;
+
+  // Apply formatting for PRC Number
+  if (name === "prc_number" || name === "ptr_number") {
+    const formattedValue = value.replace(/(\d{2})(\d{3})(\d{4})/, "$1-$2-$3");
+    setDentists((prev) => ({ ...prev, [name]: formattedValue }));
+  } else {
+    setDentists((prev) => ({ ...prev, [name]: value }));
+  }
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,20 +73,63 @@ const DentistCreate = () => {
           <Stack direction={"column"} spacing={8} align="center" sx={{pt:10}}>
               <Stack>
                 <Stack direction={"row"} spacing={4} justifyContent={"center"} >
-                <TextField helperText="Full Name" variant="standard" type="text" required name="name" onChange={handleChanged} value={dentists.name}/>
-                <TextField helperText="Email" variant="standard" type="email" name="email" onChange={handleChanged} value={dentists.email}/>
+                <TextField helperText="Full Name" variant="standard" type="text" required name="name"  onChange={handleChanged} value={dentists.name}/>
+                <TextField helperText="Email" variant="standard" type="email" unique name="email" onChange={handleChanged} value={dentists.email}/>
                 <TextField helperText="Password" variant="standard" type="password" name="password" onChange={handleChanged} value={dentists.password}/>
+                <TextField
+                      helperText="Contact Number"
+                      variant="standard"
+                      type="tel"
+                      required
+                      unique
+                      name="contact_number"
+                      onChange={(e) => {
+                        const phoneNumber = e.target.value.replace(/\D/g, "");
+                        const formattedNumber = phoneNumber.slice(-10);
 
-                <TextField helperText="Contact Number" variant="standard" type="number" inputProps={{ maxLength: 10}} required name="contact_number" onChange={handleChanged} value={dentists.contact_number}
-                          InputProps={{startAdornment: <InputAdornment position="start">+63</InputAdornment>,}}
-                />
+                        setDentists((prev) => ({ ...prev, contact_number: formattedNumber }));
+                      }}
+                      value={dentists.contact_number}
+                      InputProps={{ startAdornment: <InputAdornment position="start">+63</InputAdornment> }}
+                      inputProps={{
+                        pattern: "[0-9]{10}",
+                        onInvalid: (e) => {
+                          e.target.setCustomValidity("Please input a valid 10-digit phone number");
+                        },
+                      }}
+                    />
+
+                      
+
                 </Stack>
               </Stack>
               <Stack>
                 <Stack direction={"row"} spacing={4} justifyContent={"center"} >
                 <TextField helperText="Age" variant="standard" type="number" required  name="age" onChange={handleChanged} value={dentists.age}/>
-                <TextField helperText="PRC Number" variant="standard" type="number" required  name="prc_number" onChange={handleChanged} value={dentists.prc_number}/>
-                <TextField helperText="PTR Number" variant="standard" type="number" required  name="ptr_number" onChange={handleChanged} value={dentists.ptr_number}/>
+                <TextField
+                  helperText="PRC Number"
+                  variant="standard"
+                  type="text"
+                  required
+                  name="prc_number"
+                  onChange={handleChanged}
+                  value={dentists.prc_number}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">PRC-</InputAdornment>,
+                  }}
+                />
+                                <TextField
+                  helperText="PTR Number"
+                  variant="standard"
+                  type="text"
+                  required
+                  name="ptr_number"
+                  onChange={handleChanged}
+                  value={dentists.ptr_number}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">PTR-</InputAdornment>,
+                  }}
+                />
                 <TextField helperText="Select Location" select variant="standard" type="text" required  name="branches" onChange={handleChanged} value={dentists.branches}>
                                 <MenuItem value="Carmona">Carmona</MenuItem>
                                 <MenuItem value="Molino">Molino</MenuItem>
