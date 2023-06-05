@@ -31,10 +31,23 @@ const DentistList = () => {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((json) => {
-        setdentists(json);
+        const updatedDentists = json.map((dentist) => {
+          const age = calculateAge(dentist.birthday);
+          return { ...dentist, age };
+        });
+        setdentists(updatedDentists);
         setLoading(false);
       });
-
+      function calculateAge(birthday) {
+        const birthDate = new Date(birthday);
+        const currentDate = new Date();
+        let age = currentDate.getFullYear() - birthDate.getFullYear();
+        const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age;
+      }
     return () => {
       controller.abort();
     };
@@ -55,6 +68,7 @@ const DentistList = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
+            <TableCell>ID</TableCell>
             <TableCell>Name</TableCell>
             <TableCell >Email</TableCell>
             <TableCell >Contact Number</TableCell>
@@ -71,6 +85,7 @@ const DentistList = () => {
               key={dentists.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+              <TableCell >{dentists.dentistsId}</TableCell>
               <TableCell >{dentists.name}</TableCell>
               <TableCell >{dentists.email}</TableCell>
               <TableCell >+63 {dentists.contact_number}</TableCell>

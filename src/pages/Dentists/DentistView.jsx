@@ -33,10 +33,21 @@ const DentistsView = () => {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((json) => {
-        setdentists(json);
+        const age = calculateAge(json.birthday);
+        const updatedDentist = { ...json, age };
+        setdentists(updatedDentist);
         setLoading(false);
       });
-
+      function calculateAge(birthday) {
+        const birthDate = new Date(birthday);
+        const currentDate = new Date();
+        let age = currentDate.getFullYear() - birthDate.getFullYear();
+        const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age;
+      }
     return () => {
       controller.abort();
     };
@@ -71,6 +82,7 @@ const DentistsView = () => {
 <NavbarMUI />
     <Box sx={{px:5, py:5}}>
     <Typography variant="h4" sx={{mx:5, my:5}} align="center" color={"palevioletred"}>Dentists Details</Typography>
+    <Typography variant="h4" sx={{mx:5, my:5}} align="center" color={"palevioletred"}>{dentists.dentistsId}</Typography>
 
 {loading ? (
      <Typography variant="h4" sx={{mx:5, my:5}} align="center">Loading...</Typography>

@@ -5,12 +5,27 @@ import { Typography, Box, Button, Stack, Container, TextField, MenuItem } from "
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+
+
+
 const DentistCreate = () => {
   const [dentists, setDentists] = useState({
+    name: "",
+    email: "",
+    password: "",
+    contact_number: "",
+    age: "",
+    prc_number: "",
+    ptr_number: "",
+    branches: ""
   });
 
   const navigate = useNavigate();
 //   const { token } = useAuth();
+const [showPassword, setShowPassword] = useState(false);
 
 const handleChanged = (e) => {
   const { name, value } = e.target;
@@ -43,7 +58,7 @@ const handleChanged = (e) => {
         email: dentists.email,
         password: dentists.password,
         contact_number: dentists.contact_number,
-        age: dentists.age,
+        birthday: dentists.birthday,
         prc_number: dentists.prc_number,
         ptr_number: dentists.ptr_number,
         branches:dentists.branches
@@ -58,7 +73,14 @@ const handleChanged = (e) => {
       controller.abort();
     };
   };
-
+  function formatPhoneNumber(phoneNumber) {
+    const cleaned = phoneNumber.replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return `${match[1]}-${match[2]}-${match[3]}`;
+    }
+    return phoneNumber;
+  }
   return (
     <>
     <NavbarMUI />
@@ -73,63 +95,63 @@ const handleChanged = (e) => {
           <Stack direction={"column"} spacing={8} align="center" sx={{pt:10}}>
               <Stack>
                 <Stack direction={"row"} spacing={4} justifyContent={"center"} >
+                {/* name */}
                 <TextField helperText="Full Name" variant="standard" type="text" required name="name"  onChange={handleChanged} value={dentists.name}/>
-                <TextField helperText="Email" variant="standard" type="email" unique name="email" onChange={handleChanged} value={dentists.email}/>
-                <TextField helperText="Password" variant="standard" type="password" name="password" onChange={handleChanged} value={dentists.password}/>
-                <TextField
-                      helperText="Contact Number"
-                      variant="standard"
-                      type="tel"
-                      required
-                      unique
-                      name="contact_number"
-                      onChange={(e) => {
-                        const phoneNumber = e.target.value.replace(/\D/g, "");
-                        const formattedNumber = phoneNumber.slice(-10);
-
-                        setDentists((prev) => ({ ...prev, contact_number: formattedNumber }));
-                      }}
-                      value={dentists.contact_number}
-                      InputProps={{ startAdornment: <InputAdornment position="start">+63</InputAdornment> }}
-                      inputProps={{
-                        pattern: "[0-9]{10}",
-                        onInvalid: (e) => {
-                          e.target.setCustomValidity("Please input a valid 10-digit phone number");
-                        },
-                      }}
-                    />
-
-                      
-
+                {/* Email */}
+                <TextField helperText="Email" variant="standard" type="email" name="email"  value={dentists.email} onChange={handleChanged}/>
+                {/* Password */}
+                <TextField helperText="Password" variant="standard" type={showPassword ? 'text' : 'password'} name="password" value={dentists.password} onChange={handleChanged}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                edge="end"
+                                onClick={() => setShowPassword(!showPassword)}
+                                onMouseDown={(e) => e.preventDefault()}
+                              >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                {/* contact number */}
+                <TextField helperText="Contact Number" variant="standard" type="tel" required name="contact_number"
+                    onChange={(e) => {
+                    const phoneNumber = e.target.value.replace(/\D/g, "");
+                    const formattedNumber = formatPhoneNumber(phoneNumber);
+                    setDentists((prev) => ({ ...prev, contact_number: formattedNumber }));
+                  }}
+                  value={formatPhoneNumber(dentists.contact_number)}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">+63</InputAdornment>,
+                  }}
+                  inputProps={{
+                    pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+                    onInvalid: (e) => {
+                      e.target.setCustomValidity("Please input a valid 10-digit phone number in the format 000-000-0000");
+                    },
+                  }}
+                />
                 </Stack>
               </Stack>
               <Stack>
                 <Stack direction={"row"} spacing={4} justifyContent={"center"} >
-                <TextField helperText="Age" variant="standard" type="number" required  name="age" onChange={handleChanged} value={dentists.age}/>
-                <TextField
-                  helperText="PRC Number"
-                  variant="standard"
-                  type="text"
-                  required
-                  name="prc_number"
-                  onChange={handleChanged}
-                  value={dentists.prc_number}
+                {/* Birthday */}
+                <TextField helperText="Birthday" variant="standard" type="date" required name="birthday" onChange={handleChanged}value={dentists.birthday}/>
+                {/* PRC Number */}
+                <TextField helperText="PRC Number" variant="standard" type="text" required name="prc_number" onChange={handleChanged} value={dentists.prc_number}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">PRC-</InputAdornment>,
                   }}
                 />
-                                <TextField
-                  helperText="PTR Number"
-                  variant="standard"
-                  type="text"
-                  required
-                  name="ptr_number"
-                  onChange={handleChanged}
-                  value={dentists.ptr_number}
+                {/* PTR Number */}
+                  <TextField helperText="PTR Number" variant="standard" type="text" required name="ptr_number" onChange={handleChanged} value={dentists.ptr_number}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">PTR-</InputAdornment>,
                   }}
                 />
+                {/* Branch Choices */}
                 <TextField helperText="Select Location" select variant="standard" type="text" required  name="branches" onChange={handleChanged} value={dentists.branches}>
                                 <MenuItem value="Carmona">Carmona</MenuItem>
                                 <MenuItem value="Molino">Molino</MenuItem>
@@ -138,9 +160,6 @@ const handleChanged = (e) => {
                                 <MenuItem value="Dasmarinas">Dasmarinas</MenuItem>
                                 <MenuItem value="Las Pinas">Las Pinas</MenuItem>
                             </TextField>
-
-
-
                 </Stack>
               </Stack>
               <Stack direction={"row"} spacing={4} justifyContent={"center"} sx={{px:5, pt:5, pb:10}}>
@@ -148,9 +167,7 @@ const handleChanged = (e) => {
               </Stack>
                 </Stack>
         </Box>
-      
       </Container>
-      
     </Container>
     <FooterMUI />
     </>
