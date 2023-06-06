@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-// import { useAuth } from "../../contexts/AuthContext";
-import { Typography, Box, Button, Stack, Container } from "@mui/material"
-
+import { Typography, Box, Button, Stack, Container, Grid } from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 
 const DentistsView = () => {
   const { id } = useParams();
-  const [dentists, setdentists] = useState({});
-
-//   const { token } = useAuth();
+  const [dentists, setDentists] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,7 +20,6 @@ const DentistsView = () => {
       headers: {
         signal: controller.signal,
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${token}`,
       },
     };
 
@@ -35,37 +30,71 @@ const DentistsView = () => {
       .then((json) => {
         const age = calculateAge(json.birthday);
         const updatedDentist = { ...json, age };
-        setdentists(updatedDentist);
+        setDentists(updatedDentist);
         setLoading(false);
       });
-      function calculateAge(birthday) {
-        const birthDate = new Date(birthday);
-        const currentDate = new Date();
-        let age = currentDate.getFullYear() - birthDate.getFullYear();
-        const monthDifference = currentDate.getMonth() - birthDate.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
-          age--;
-        }
-        return age;
+
+    function calculateAge(birthday) {
+      const birthDate = new Date(birthday);
+      const currentDate = new Date();
+      let age = currentDate.getFullYear() - birthDate.getFullYear();
+      const monthDifference =
+        currentDate.getMonth() - birthDate.getMonth();
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 &&
+          currentDate.getDate() < birthDate.getDate())
+      ) {
+        age--;
       }
+      return age;
+    }
+
     return () => {
       controller.abort();
     };
   }, [id]);
-
-  const handleDelete = (e) => {
-    if (window.confirm("Are you really sure you want to delete this record?")) {
-      let url = 'http://localhost:5000/api/dentists';
+  const [profilePicture, setProfilePicture] = useState(null);
+  const handleProfilePictureChange = (event) => {
+    const file = event.target.files[0];
+    setProfilePicture(file);
+  };
+  const handleProfilePictureUpload = () => {
+    if (profilePicture) {
+      const formData = new FormData();
+      formData.append("profilePicture", profilePicture);
+  
+      let url = `http://localhost:5000/api/dentists/profile-pic/${id}`;
+  
+      const requestOptions = {
+        method: "PUT",
+        body: formData,
+      };
+  
+      fetch(url, requestOptions)
+        .then((response) => response.json())
+        .then((json) => {
+          const updatedDentist = { ...dentists, profilePicture: json.profilePicture };
+          setDentists(updatedDentist);
+          setProfilePicture(null);
+        })
+        .then(() => navigate(`/dentists/${id}`))
+        .catch((error) => console.log(error));
+    }
+  };
+  
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this record?")) {
+      let url = "http://localhost:5000/api/dentists";
 
       const requestOptions = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-        //   Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          id: id
-        }), 
+          id: id,
+        }),
       };
 
       fetch(url, requestOptions)
@@ -76,103 +105,141 @@ const DentistsView = () => {
     }
   };
 
+  const imgurl = `http://localhost:5000/${dentists.profilePicture}`;
+
   return (
     <>
+      <NavbarMUI />
+      <Box sx={{px: 5, py: 5, backgroundColor: "#F2E7EB", minHeight: "100vh", fontFamily: "cursive",}}>
+        <Typography variant="h4" sx={{ mx: 5, my: 5 }} align="center" color="palevioletred">
+          Dentists Details
+        </Typography>
+        <Typography variant="h4" sx={{ mx: 5, my: 5 }} align="center"color="palevioletred">
+          {dentists.dentistsId}
+        </Typography>
 
-<NavbarMUI />
-    <Box sx={{px:5, py:5}}>
-    <Typography variant="h4" sx={{mx:5, my:5}} align="center" color={"palevioletred"}>Dentists Details</Typography>
-    <Typography variant="h4" sx={{mx:5, my:5}} align="center" color={"palevioletred"}>{dentists.dentistsId}</Typography>
+        {loading ? (
+          <Typography variant="h4" sx={{ mx: 5, my: 5 }} align="center">
+            Loading...
+          </Typography>
+        ) : (
+          <Container>
+            <Grid container spacing={2} justifyContent="center">
+              {dentists.profilePicture && (
+                <Grid item xs={12}>
+                  <Stack direction="row" justifyContent="center">
+                  <img
+        src={imgurl}
+        alt="Profile"
+        width={200}
+        height={200}
+        style={{
+          borderRadius: "50%",
+          objectFit: "cover",
+        }}
+      />
+                  </Stack>
+                  <input
+      type="file"
+      accept="image/*"
+      onChange={handleProfilePictureChange}
+    />
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={handleProfilePictureUpload}
+    >
+      Update Profile Picture
+    </Button>
+                </Grid>
+              )}
 
-{loading ? (
-     <Typography variant="h4" sx={{mx:5, my:5}} align="center">Loading...</Typography>
-) : (
-  <>
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Name:</Typography>
+                  <Typography variant="h6">{dentists.name}</Typography>
+                </Stack>
+              </Grid>
 
-<Container >
-    <Stack direction={"row"} justifyContent={"center"}>
-    <Stack direction={"column"}>
-      <Stack direction={"row"} >
-        <Stack px={10} style={{width: 155}} >
-        <Typography variant="h6" >Name:</Typography>
-        </Stack>
-        <Stack px={10}  >
-        <Typography variant="h6" >{dentists.name}</Typography>
-        </Stack>
-      </Stack>
-      <Stack direction={"row"} >
-        <Stack px={10} style={{width: 155}} >
-        <Typography variant="h6" >Email:</Typography>
-        </Stack>
-        <Stack px={10} >
-        <Typography variant="h6" >{dentists.email}</Typography>
-        </Stack>
-      </Stack>
-      <Stack direction={"row"} >
-        <Stack px={10} style={{width: 155}} >
-        <Typography variant="h6" >Contact Number:</Typography>
-        </Stack>
-        <Stack px={10} >
-        <Typography variant="h6" >+63 {dentists.contact_number}</Typography>
-        </Stack>
-      </Stack>
-      <Stack direction={"row"} >
-        <Stack px={10} style={{width: 155}} >
-        <Typography variant="h6" >Age:</Typography>
-        </Stack>
-        <Stack px={10} >
-        <Typography variant="h6" >{dentists.age}</Typography>
-        </Stack>
-      </Stack>
-      <Stack direction={"row"} >
-        <Stack px={10} style={{width: 155}}>
-        <Typography variant="h6" >PRC Number</Typography>
-        </Stack>
-        <Stack px={10} >
-        <Typography variant="h6" >{dentists.prc_number}</Typography>
-        </Stack>
-      </Stack>
-      <Stack direction={"row"} >
-        <Stack px={10} style={{width: 155}}>
-        <Typography variant="h6" >PTR Number</Typography>
-        </Stack>
-        <Stack px={10} >
-        <Typography variant="h6" >{dentists.ptr_number}</Typography>
-        </Stack>
-      </Stack>
-      <Stack direction={"row"} >
-        <Stack px={10} style={{width: 155}}>
-        <Typography variant="h6" >Branch</Typography>
-        </Stack>
-        <Stack px={10} >
-        <Typography variant="h6" >{dentists.branches}</Typography>
-        </Stack>
-      </Stack>
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Email:</Typography>
+                  <Typography variant="h6">{dentists.email}</Typography>
+                </Stack>
+              </Grid>
 
-    </Stack>
-    </Stack>
-        <Stack direction={"row"} spacing={4} justifyContent={"center"} sx={{px:5, pb:10, pt:5}}>
-          <Link to="/dentists">
-          <Button variant="contained" color="primary" sx={{ color: "White" }} >Dentist List</Button>
-          </Link>
-          <Link to={`/dentists/edit/${dentists._id}`}>
-          <Button variant="contained" color="primary" sx={{ color: "White" }} >Edit</Button>
-          </Link>
-          <Button variant="contained" color="primary" sx={{ color: "White" }} onClick={handleDelete}>Delete</Button>
-          <Link to="/dentists/new">
-          <Button variant="contained" color="primary" sx={{ color: "White" }} > Add </Button>
-          </Link>
-        </Stack>
-        </Container>
-  </>
-)}
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Contact Number:</Typography>
+                  <Typography variant="h6">
+                    +63 {dentists.contact_number}
+                  </Typography>
+                </Stack>
+              </Grid>
 
-    </Box>
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Age:</Typography>
+                  <Typography variant="h6">{dentists.age}</Typography>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">PRC Number:</Typography>
+                  <Typography variant="h6">{dentists.prc_number}</Typography>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">PTR Number:</Typography>
+                  <Typography variant="h6">{dentists.ptr_number}</Typography>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Branch:</Typography>
+                  <Typography variant="h6">{dentists.branches}</Typography>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={12} textAlign="center">
+                <Stack direction="row" spacing={2} justifyContent="center">
+                  <Link to="/dentists">
+                    <Button variant="contained" color="primary">
+                      Dentist List
+                    </Button>
+                  </Link>
+                  <Link to={`/dentists/edit/${dentists._id}`}>
+                    <Button variant="contained" color="primary">
+                      Edit
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </Button>
+                  <Link to="/dentists/new">
+                    <Button variant="contained" color="primary">
+                      Add
+                    </Button>
+                  </Link>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Container>
+        )}
+      </Box>
       <FooterMUI />
     </>
-
-
   );
 };
 
 export default DentistsView;
+
+
