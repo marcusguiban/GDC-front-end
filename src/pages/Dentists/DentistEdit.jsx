@@ -16,7 +16,7 @@ const DentistEdit = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    let url = `http://localhost:5000/api/dentists/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/api/dentists/${id}`;
 
     const controller = new AbortController();
 
@@ -51,7 +51,7 @@ const DentistEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = "http://localhost:5000/api/dentists";
+    let url = `${process.env.REACT_APP_API_URL}/dentists`;
 
     const requestOptions = {
       method: "PUT",

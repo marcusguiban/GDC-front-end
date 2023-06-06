@@ -11,7 +11,7 @@ const DentistsView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `http://localhost:5000/api/dentists/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/${id}`;
 
     const controller = new AbortController();
 
@@ -64,7 +64,7 @@ const DentistsView = () => {
       const formData = new FormData();
       formData.append("profilePicture", profilePicture);
   
-      let url = `http://localhost:5000/api/dentists/profile-pic/${id}`;
+      let url = `${process.env.REACT_APP_API_URL}/api/dentists/profile-pic/${id}`;
   
       const requestOptions = {
         method: "PUT",
@@ -85,7 +85,7 @@ const DentistsView = () => {
   
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this record?")) {
-      let url = "http://localhost:5000/api/dentists";
+      let url = `${process.env.REACT_APP_API_URL}/api/dentists`;
 
       const requestOptions = {
         method: "DELETE",
@@ -105,7 +105,7 @@ const DentistsView = () => {
     }
   };
 
-  const imgurl = `http://localhost:5000/${dentists.profilePicture}`;
+  const imgurl = `${process.env.REACT_APP_API_URL}/${dentists.profilePicture}`;
 
   return (
     <>

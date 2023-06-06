@@ -19,7 +19,7 @@ const DentistCarmona = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = 'http://localhost:5000/api/dentists/Carmona';
+    let url = `${process.env.REACT_APP_API_URL}/api/dentists/Carmona`;
 
     const requestOptions = {
       signal: controller.signal,

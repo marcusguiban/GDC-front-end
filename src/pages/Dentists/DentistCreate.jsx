@@ -52,7 +52,7 @@ const DentistCreate = () => {
       formData.append(key, value);
     });
 
-    fetch("http://localhost:5000/api/dentists", {
+    fetch(`${process.env.REACT_APP_API_URL}/api/dentists`, {
       method: "POST",
       body: formData,
     })
