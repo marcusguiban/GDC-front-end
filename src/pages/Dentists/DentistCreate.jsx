@@ -52,7 +52,7 @@ const DentistCreate = () => {
       formData.append(key, value);
     });
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/dentists`, {
+    fetch("http://localhost:5000/api/dentists", {
       method: "POST",
       body: formData,
     })
@@ -144,7 +144,7 @@ const DentistCreate = () => {
                   Upload Profile Picture
                 </Button>
               </label>
-              <Button type="submit" variant="outlined" fullWidth>
+              <Button type="submit" variant="outlined">
                 Save
               </Button>
             </Stack>

@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Typography, Box, Button, Stack, TextField, Grid, IconButton, Container } from "@mui/material";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { Typography, Box, Button, Stack, TextField, Grid, Container } from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 import InputAdornment from "@mui/material/InputAdornment";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
 const DentistEdit = () => {
   const { id } = useParams();
   const [dentists, setDentists] = useState({
     password: "",
   });
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+
 
   useEffect(() => {
-    let url = `${process.env.REACT_APP_API_URL}/api/dentists/${id}`;
+    let url = `http://localhost:5000/api/dentists/${id}`;
 
     const controller = new AbortController();
 
@@ -51,7 +48,7 @@ const DentistEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = `${process.env.REACT_APP_API_URL}/dentists`;
+    let url = `http://localhost:5000/api/dentists/:id`;
 
     const requestOptions = {
       method: "PUT",
@@ -61,7 +58,6 @@ const DentistEdit = () => {
       body: JSON.stringify({
         name: dentists.name,
         email: dentists.email,
-        password: dentists.password,
         contact_number: dentists.contact_number,
         birthday: dentists.birthday,
         prc_number: dentists.prc_number,
@@ -78,6 +74,7 @@ const DentistEdit = () => {
       .then(() => navigate(`/dentists/${id}`))
       .catch((error) => console.log(error));
   };
+
   function formatPhoneNumber(phoneNumber) {
     if (!phoneNumber) {
       return ""; // Return an empty string or any default value when phoneNumber is undefined
@@ -103,17 +100,6 @@ const DentistEdit = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField helperText="Email" variant="standard" type="email" name="email" onChange={handleChanged} value={dentists.email} fullWidth/>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField fullWidth helperText="Password" variant="standard" type={showPassword ? "text" : "password"} name="password" onChange={handleChanged} InputProps={{endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton edge="end" onClick={() => setShowPassword(!showPassword)} onMouseDown={(e) => e.preventDefault()}>
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
               </Grid>
               <Grid item xs={12}>
                 <TextField fullWidth helperText="Contact Number" variant="standard" type="tel" required unique name="contact_number" onChange={(e) => {
@@ -148,6 +134,11 @@ const DentistEdit = () => {
               <Button type="submit" value="Update" variant="outlined" size="large">
                 Update
               </Button>
+              <Link to={`/dentists/edit/Change-password/${dentists._id}`}>
+                    <Button variant="contained" color="primary">
+                      Change password
+                    </Button>
+                  </Link>
             </Stack>
           </Box>
         </Container>

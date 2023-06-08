@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { Typography, Box, Button, Stack, Container, Grid } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Stack,
+  Container,
+  Grid,
+} from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 
@@ -11,7 +18,7 @@ const DentistsView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `${process.env.REACT_APP_API_URL}/dentists/${id}`;
+    let url = `http://localhost:5000/api/dentists/${id}`;
 
     const controller = new AbortController();
 
@@ -54,27 +61,32 @@ const DentistsView = () => {
       controller.abort();
     };
   }, [id]);
+
   const [profilePicture, setProfilePicture] = useState(null);
   const handleProfilePictureChange = (event) => {
     const file = event.target.files[0];
     setProfilePicture(file);
   };
+
   const handleProfilePictureUpload = () => {
     if (profilePicture) {
       const formData = new FormData();
       formData.append("profilePicture", profilePicture);
-  
-      let url = `${process.env.REACT_APP_API_URL}/api/dentists/profile-pic/${id}`;
-  
+
+      let url = `http://localhost:5000/api/dentists/profile-pic/${id}`;
+
       const requestOptions = {
         method: "PUT",
         body: formData,
       };
-  
+
       fetch(url, requestOptions)
         .then((response) => response.json())
         .then((json) => {
-          const updatedDentist = { ...dentists, profilePicture: json.profilePicture };
+          const updatedDentist = {
+            ...dentists,
+            profilePicture: json.profilePicture,
+          };
           setDentists(updatedDentist);
           setProfilePicture(null);
         })
@@ -82,10 +94,10 @@ const DentistsView = () => {
         .catch((error) => console.log(error));
     }
   };
-  
+
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this record?")) {
-      let url = `${process.env.REACT_APP_API_URL}/api/dentists`;
+      let url = `http://localhost:5000/api/dentists`;
 
       const requestOptions = {
         method: "DELETE",
@@ -105,55 +117,63 @@ const DentistsView = () => {
     }
   };
 
-  const imgurl = `${process.env.REACT_APP_API_URL}/${dentists.profilePicture}`;
+  const imgurl = `http://localhost:5000/${dentists.profilePicture}`;
 
   return (
     <>
       <NavbarMUI />
-      <Box sx={{px: 5, py: 5, backgroundColor: "#F2E7EB", minHeight: "100vh", fontFamily: "cursive",}}>
-        <Typography variant="h4" sx={{ mx: 5, my: 5 }} align="center" color="palevioletred">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+          backgroundColor: "#F2E7EB",
+          fontFamily: "cursive",
+        }}
+      >
+        <Typography variant="h4" sx={{ my: 5 }} align="center" color="palevioletred">
           Dentists Details
         </Typography>
-        <Typography variant="h4" sx={{ mx: 5, my: 5 }} align="center"color="palevioletred">
+        <Typography variant="h4" sx={{ my: 5 }} align="center" color="palevioletred">
           {dentists.dentistsId}
         </Typography>
 
         {loading ? (
-          <Typography variant="h4" sx={{ mx: 5, my: 5 }} align="center">
+          <Typography variant="h4" sx={{ my: 5 }} align="center">
             Loading...
           </Typography>
         ) : (
-          <Container>
-            <Grid container spacing={2} justifyContent="center">
-              {dentists.profilePicture && (
-                <Grid item xs={12}>
-                  <Stack direction="row" justifyContent="center">
-                  <img
+          <Container maxWidth="sm">
+{dentists.profilePicture && (
+  <Box textAlign="center" my={4}>
+    <Stack direction="column" alignItems="center" spacing={2}>
+      <img
         src={imgurl}
         alt="Profile"
         width={200}
         height={200}
-        style={{
-          borderRadius: "50%",
-          objectFit: "cover",
-        }}
+        style={{ borderRadius: "50%", objectFit: "cover" }}
       />
-                  </Stack>
-                  <input
-      type="file"
-      accept="image/*"
-      onChange={handleProfilePictureChange}
-    />
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={handleProfilePictureUpload}
-    >
-      Update Profile Picture
-    </Button>
-                </Grid>
-              )}
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleProfilePictureChange}
+      />
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleProfilePictureUpload}
+      >
+        Update Profile Picture
+      </Button>
+    </Stack>
+  </Box>
+)}
 
+
+            <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Stack spacing={2}>
                   <Typography variant="h6">Name:</Typography>
@@ -171,9 +191,7 @@ const DentistsView = () => {
               <Grid item xs={12}>
                 <Stack spacing={2}>
                   <Typography variant="h6">Contact Number:</Typography>
-                  <Typography variant="h6">
-                    +63 {dentists.contact_number}
-                  </Typography>
+                  <Typography variant="h6">+63 {dentists.contact_number}</Typography>
                 </Stack>
               </Grid>
 
@@ -206,7 +224,12 @@ const DentistsView = () => {
               </Grid>
 
               <Grid item xs={12} textAlign="center">
-                <Stack direction="row" spacing={2} justifyContent="center">
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  justifyContent="center"
+                  mt={4}
+                >
                   <Link to="/dentists">
                     <Button variant="contained" color="primary">
                       Dentist List
@@ -241,5 +264,6 @@ const DentistsView = () => {
 };
 
 export default DentistsView;
+
 
 
