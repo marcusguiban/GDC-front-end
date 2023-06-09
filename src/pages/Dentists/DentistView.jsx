@@ -7,6 +7,7 @@ import {
   Stack,
   Container,
   Grid,
+  Modal,
 } from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
@@ -16,6 +17,10 @@ const DentistsView = () => {
   const [dentists, setDentists] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [nextId, setNextId] = useState(null);
+  const [prevId, setPrevId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
 
   useEffect(() => {
     let url = `http://localhost:5000/api/dentists/${id}`;
@@ -57,10 +62,33 @@ const DentistsView = () => {
       return age;
     }
 
-    return () => {
-      controller.abort();
-    };
-  }, [id]);
+    fetch('http://localhost:5000/api/dentists')
+    .then((response) => response.json())
+    .then((json) => {
+      const dentistIds = json.map(dentist => dentist._id);
+      const currentIndex = dentistIds.indexOf(id);
+      if (currentIndex > 0) {
+        setPrevId(dentistIds[currentIndex - 1]);
+      }
+      if (currentIndex < dentistIds.length - 1) {
+        setNextId(dentistIds[currentIndex + 1]);
+      }
+    });
+
+  return () => {
+    controller.abort();
+  };
+}, [id]);
+
+const openModal = (image) => {
+  setModalImage(image);
+  setIsModalOpen(true);
+};
+
+const closeModal = () => {
+  setIsModalOpen(false);
+  setModalImage(null);
+};
 
   const [profilePicture, setProfilePicture] = useState(null);
   const handleProfilePictureChange = (event) => {
@@ -116,7 +144,9 @@ const DentistsView = () => {
         .catch((error) => console.log(error));
     }
   };
-
+  const handleProfilePictureClick = () => {
+    openModal(imgurl);
+  };
   const imgurl = `http://localhost:5000/${dentists.profilePicture}`;
 
   return (
@@ -147,8 +177,9 @@ const DentistsView = () => {
         ) : (
           <Container maxWidth="sm">
 {dentists.profilePicture && (
-  <Box textAlign="center" my={4}>
+  <Box textAlign="center" my={4} >
     <Stack direction="column" alignItems="center" spacing={2}>
+      <Box onClick={handleProfilePictureClick}>
       <img
         src={imgurl}
         alt="Profile"
@@ -156,6 +187,8 @@ const DentistsView = () => {
         height={200}
         style={{ borderRadius: "50%", objectFit: "cover" }}
       />
+      </Box>
+
       <input
         type="file"
         accept="image/*"
@@ -201,6 +234,12 @@ const DentistsView = () => {
                   <Typography variant="h6">{dentists.age}</Typography>
                 </Stack>
               </Grid>
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Gender:</Typography>
+                  <Typography variant="h6">{dentists.gender}</Typography>
+                </Stack>
+              </Grid>
 
               <Grid item xs={12}>
                 <Stack spacing={2}>
@@ -222,8 +261,68 @@ const DentistsView = () => {
                   <Typography variant="h6">{dentists.branches}</Typography>
                 </Stack>
               </Grid>
-
+              {dentists.education && (
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Education:</Typography>
+                  <Typography variant="h6">{dentists.education}</Typography>
+                </Stack>
+              </Grid>
+              )}
+              {dentists.degree && (
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Degree:</Typography>
+                  <Typography variant="h6">{dentists.degree}</Typography>
+                </Stack>
+              </Grid>
+              )}
+              {dentists.occupation && (
+              <Grid item xs={12}>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Occupation:</Typography>
+                  <Typography variant="h6">{dentists.occupation}</Typography>
+                </Stack>
+              </Grid>
+              )}
               <Grid item xs={12} textAlign="center">
+              <Container maxWidth="sm">
+        {/* Previous Dentist Button */}
+        {prevId && (
+          <Link to={`/dentists/${prevId}`}>
+            <Button variant="contained" color="primary">
+              Previous Dentist
+            </Button>
+          </Link>
+        )}
+
+        {/* Next Dentist Button */}
+        {nextId && (
+          <Link to={`/dentists/${nextId}`}>
+            <Button variant="contained" color="primary">
+              Next Dentist
+            </Button>
+          </Link>
+        )}
+                <Modal open={isModalOpen} onClose={closeModal}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            {modalImage && (
+              <img
+                src={modalImage}
+                alt="Profile"
+                style={{ maxHeight: "90vh", maxWidth: "90vw" }}
+              />
+            )}
+          </Box>
+        </Modal>
+</Container>
                 <Stack
                   direction="row"
                   spacing={2}
@@ -250,6 +349,11 @@ const DentistsView = () => {
                   <Link to="/dentists/new">
                     <Button variant="contained" color="primary">
                       Add
+                    </Button>
+                  </Link>
+                  <Link to={`/dentists/edit/update/${dentists._id}`}>
+                    <Button variant="contained" color="primary">
+                      Update
                     </Button>
                   </Link>
                 </Stack>

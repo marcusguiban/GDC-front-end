@@ -132,7 +132,7 @@ const DentistEdit = () => {
             </Grid>
             <Stack direction="row" spacing={2} justifyContent="center" sx={{ px: 2, pb: 2, pt: 2 }}>
               <Button type="submit" value="Update" variant="outlined" size="large">
-                Update
+                Edit
               </Button>
               <Link to={`/dentists/edit/Change-password/${dentists._id}`}>
                     <Button variant="contained" color="primary">

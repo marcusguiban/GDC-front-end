@@ -15,6 +15,8 @@ import DentistLasPinas from './pages/branches/Laspinas';
 import DentistMolino from './pages/branches/Molino';
 import DentistCarmona from './pages/branches/Carmona';
 import ChangePassword from './pages/Dentists/DentistChangePassword';
+import ContactUsEmailSender from './pages/Utilities/ContactUs';
+import DentistUpdate from './pages/Dentists/DentistUpdate';
 function App() {
   return (
     <>
@@ -30,8 +32,11 @@ function App() {
        <Route path="/Dentists/Carmona" element={<DentistCarmona />}></Route>
        <Route path="/Dentists/Laspinas" element={<DentistLasPinas />}></Route>
 
+       <Route path="/ContactUs" element={<ContactUsEmailSender />}></Route>
+
        <Route path="/Dentists/edit/:id" element={<DentistEdit />}></Route>
        <Route path="/Dentists/edit/Change-password/:id" element={<ChangePassword />}></Route>
+       <Route path="/Dentists/edit/update/:id" element={<DentistUpdate />}></Route>
        <Route path="/Dentists/:id" element={<DentistsView />}></Route>
        <Route path="/Dentists" element={<DentistList />}></Route>
        <Route path="/Dentists/new" element={<DentistCreate />}></Route>

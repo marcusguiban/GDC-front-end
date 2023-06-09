@@ -44,6 +44,11 @@ const HomePage = () => {
                         <Link to="/dentists/Laspinas"><Button size="lg" variant="outlined" color="secondary">Las Pinas</Button></Link>
                     </Stack>
                 </Grid>
+                <Grid item  sm={12} md={6} lg={2}>
+                    <Stack direction="row" justifyContent={"center"}>
+                        <Link to="/ContactUs"><Button size="lg" variant="outlined" color="secondary">Contact Us</Button></Link>
+                    </Stack>
+                </Grid>
             </Grid>
         </Container>
 
