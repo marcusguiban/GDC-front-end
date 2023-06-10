@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import {
-  Typography,
-  Box,
-  Button,
-  Stack,
-  Container,
-  Grid,
-  Modal,
-} from "@mui/material";
+import {Typography,Box,Button,Stack,Container,Grid,Modal,} from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 
@@ -24,9 +16,7 @@ const DentistsView = () => {
 
   useEffect(() => {
     let url = `http://localhost:5000/api/dentists/${id}`;
-
     const controller = new AbortController();
-
     const requestOptions = {
       method: "GET",
       headers: {
@@ -36,7 +26,6 @@ const DentistsView = () => {
     };
 
     setLoading(true);
-
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((json) => {
@@ -45,7 +34,6 @@ const DentistsView = () => {
         setDentists(updatedDentist);
         setLoading(false);
       });
-
     function calculateAge(birthday) {
       const birthDate = new Date(birthday);
       const currentDate = new Date();
@@ -74,7 +62,6 @@ const DentistsView = () => {
         setNextId(dentistIds[currentIndex + 1]);
       }
     });
-
   return () => {
     controller.abort();
   };
@@ -84,12 +71,10 @@ const openModal = (image) => {
   setModalImage(image);
   setIsModalOpen(true);
 };
-
 const closeModal = () => {
   setIsModalOpen(false);
   setModalImage(null);
 };
-
   const [profilePicture, setProfilePicture] = useState(null);
   const handleProfilePictureChange = (event) => {
     const file = event.target.files[0];

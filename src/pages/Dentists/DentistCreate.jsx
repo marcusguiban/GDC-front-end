@@ -135,15 +135,9 @@ const DentistCreate = () => {
                 <MenuItem value="Other">Other</MenuItem>
               </TextField>
               <TextField helperText="PRC Number" variant="standard" type="text" required name="prc_number" onChange={handleChange} value={dentists.prc_number}
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">PRC-</InputAdornment>,
-                }}
-              />
+                InputProps={{startAdornment: <InputAdornment position="start">PRC-</InputAdornment>,}}/>
               <TextField helperText="PTR Number" variant="standard" type="text" required name="ptr_number" onChange={handleChange} value={dentists.ptr_number}
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">PTR-</InputAdornment>,
-                }}
-              />
+                InputProps={{startAdornment: <InputAdornment position="start">PTR-</InputAdornment>,}}/>
               <TextField helperText="Select Location" select variant="standard" type="text" required name="branches" onChange={handleChange} value={dentists.branches}>
                 <MenuItem value="Carmona">Carmona</MenuItem>
                 <MenuItem value="Molino">Molino</MenuItem>
