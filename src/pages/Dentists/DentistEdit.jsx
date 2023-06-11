@@ -16,7 +16,6 @@ const DentistEdit = () => {
     let url = `http://localhost:5000/api/dentists/${id}`;
 
     const controller = new AbortController();
-
     const requestOptions = {
       method: "GET",
       headers: {

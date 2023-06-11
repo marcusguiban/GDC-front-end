@@ -17,6 +17,12 @@ import DentistCarmona from './pages/branches/Carmona';
 import ChangePassword from './pages/Dentists/DentistChangePassword';
 import ContactUsEmailSender from './pages/Utilities/ContactUs';
 import DentistUpdate from './pages/Dentists/DentistUpdate';
+import PatientList from './pages/Patients/PatientList';
+import PatientView from './pages/Patients/PatientView';
+import PatientEdit from './pages/Patients/PatientEdit';
+import PatientCreate from './pages/Patients/PatientCreate';
+import CreateDentalChartPage from './pages/DentalCharts/DentalChartCreate';
+
 function App() {
   return (
     <>
@@ -40,6 +46,13 @@ function App() {
        <Route path="/Dentists/:id" element={<DentistsView />}></Route>
        <Route path="/Dentists" element={<DentistList />}></Route>
        <Route path="/Dentists/new" element={<DentistCreate />}></Route>
+
+       <Route path="/Patients" element={<PatientList />}></Route>
+       <Route path="/Patients/:id" element={<PatientView />}></Route>
+       <Route path="/Patients/edit/:id" element={<PatientEdit />}></Route>
+       <Route path="/Patients/new" element={<PatientCreate />}></Route>
+
+       <Route path="/DentalCharts/new" element={<CreateDentalChartPage />}></Route>
     </Routes>
 </BrowserRouter>
     </>

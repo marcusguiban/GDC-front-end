@@ -18,22 +18,22 @@ export const NavbarMUI = () => {
   const drawer = (
     <div>
       <List>
-        <ListItem button component={Link} to="/login">
+        <ListItem  component={Link} to="/login">
           <ListItemText primary="Login" />
         </ListItem>
-        <ListItem button component={Link} to="/register">
+        <ListItem  component={Link} to="/register">
           <ListItemText primary="Register" />
         </ListItem>
-        <ListItem button component={Link} to="/overview">
+        <ListItem  component={Link} to="/overview">
           <ListItemText primary="Overview" />
         </ListItem>
-        <ListItem button component={Link} to="/dentists">
+        <ListItem  component={Link} to="/dentists">
           <ListItemText primary="Doctors" />
         </ListItem>
-        <ListItem button component={Link} to="/appointment/new">
+        <ListItem  component={Link} to="/appointment/new">
           <ListItemText primary="Set an Appointment" />
         </ListItem>
-        <ListItem button component={Link} to="/patient/new">
+        <ListItem  component={Link} to="/patients/">
           <ListItemText primary="New Patient" />
         </ListItem>
         <ListItem>
@@ -88,7 +88,7 @@ export const NavbarMUI = () => {
                   <Link to="#"><Button sx={{ color: "white" }}>Register</Button></Link>
                   <Link to="#"><Button sx={{ color: "white" }}>Overview</Button></Link>
                   <Link to="/dentists"><Button sx={{ color: "white" }}>Dentists</Button></Link>
-                  <Link to="#"><Button sx={{ color: "white" }}>Patients</Button></Link>
+                  <Link to="/patients"><Button sx={{ color: "white" }}>Patients</Button></Link>
                 </Stack>
               </Box>
             </Hidden>
