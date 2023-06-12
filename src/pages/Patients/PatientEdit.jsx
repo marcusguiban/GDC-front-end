@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { Typography, Box, Button, Stack, TextField, Grid, Container, InputAdornment } from "@mui/material"
+import { Typography, Box, Button, Stack, TextField, Grid, Container, InputAdornment, MenuItem } from "@mui/material"
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 
@@ -46,7 +46,7 @@ const PatientEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = `${process.env.REACT_APP_API_URL}/patients`;
+    let url = `http://localhost:5000/api/patients`;
 
     const requestOptions = {
       method: "PUT",
@@ -54,13 +54,15 @@ const PatientEdit = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: patient.name,
+        firstName: patient.firstName,
+        lastname: patient.lastname,
+        middleName: patient.middleName,
+        prefix: patient.prefix,
         email: patient.email,
+        gender: patient.gender,
         birthday: patient.birthday,
         contactNumber: patient.contactNumber,
-        password: patient.password,
         branches: patient.branches,
-        
         id: id
       }),
     };
@@ -91,7 +93,16 @@ const PatientEdit = () => {
         <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit} sx={{ mt: 5, px: 3, py: 5, maxWidth: 500, margin: "0 auto" }}>
           <Grid container spacing={2} justifyContent="center">
             <Grid item xs={12}>
-              <TextField helperText="Name" variant="standard" type="text" required name="name" onChange={handleChanged} value={patient.name} fullWidth/>
+              <TextField helperText="Full Name" variant="standard" type="text" required name="firstName" onChange={handleChanged} value={patient.firstName} fullWidth/>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField helperText="Last Name" variant="standard" type="text" required name="lastname" onChange={handleChanged} value={patient.lastname} fullWidth/>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField helperText="Middle Name" variant="standard" type="text" name="middleName" onChange={handleChanged} value={patient.middleName} fullWidth/>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField helperText="Prefix" variant="standard" type="text" name="prefix" onChange={handleChanged} value={patient.prefix} fullWidth/>
             </Grid>
             <Grid item xs={12}>
               <TextField helperText="Email" variant="standard" type="email" name="email" onChange={handleChanged} value={patient.email} fullWidth/>
@@ -113,11 +124,23 @@ const PatientEdit = () => {
               <TextField fullWidth helperText="Birthday" variant="standard" type="date" required name="birthday"  onChange={handleChanged} value={patient.birthday}
               />
             </Grid>
-
-
             <Grid item xs={12}>
-              <TextField fullWidth helperText="Branch" variant="standard" type="text" name="branches" onChange={handleChanged} value={patient.branches}/>
-            </Grid>
+              <TextField fullWidth helperText="Select Gender" select variant="standard" type="text" required name="gender" onChange={handleChanged} value={patient.gender}>
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </TextField>
+              </Grid>
+
+              <Grid item xs={12}>
+              <TextField helperText="Select Location" select variant="standard" type="text" fullWidth required name="branches" onChange={handleChanged} value={patient.branches}>
+                <MenuItem value="Carmona">Carmona</MenuItem>
+                <MenuItem value="Molino">Molino</MenuItem>
+                <MenuItem value="Rosario">Rosario</MenuItem>
+                <MenuItem value="Dasmarinas">Dasmarinas</MenuItem>
+                <MenuItem value="Las pinas">Las Pinas</MenuItem>
+              </TextField>
+              </Grid>
           </Grid>
           <Stack direction="row" spacing={2} justifyContent="center" sx={{ px: 2, pb: 2, pt: 2 }}>
             <Button type="submit" value="Update" variant="outlined" size="large">

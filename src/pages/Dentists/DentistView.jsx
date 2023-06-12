@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import {Typography,Box,Button,Stack,Container,Grid,Modal,} from "@mui/material";
+import { Typography, Box, Button, Stack, Container, Grid, Modal, IconButton } from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
-
+import { FileCopyOutlined as FileCopyOutlinedIcon } from "@mui/icons-material"; 
 const DentistsView = () => {
   const { id } = useParams();
   const [dentists, setDentists] = useState({});
@@ -133,6 +133,9 @@ const closeModal = () => {
     openModal(imgurl);
   };
   const imgurl = `http://localhost:5000/${dentists.profilePicture}`;
+  const copyText = () => {
+    navigator.clipboard.writeText(dentists.dentistsId);
+  };
 
   return (
     <>
@@ -152,7 +155,9 @@ const closeModal = () => {
           Dentists Details
         </Typography>
         <Typography variant="h4" sx={{ my: 5 }} align="center" color="palevioletred">
-          {dentists.dentistsId}
+          {dentists.dentistsId} <IconButton onClick={copyText}>
+            <FileCopyOutlinedIcon />
+          </IconButton>
         </Typography>
 
         {loading ? (
@@ -195,7 +200,7 @@ const closeModal = () => {
               <Grid item xs={12}>
                 <Stack spacing={2}>
                   <Typography variant="h6">Name:</Typography>
-                  <Typography variant="h6">{dentists.name}</Typography>
+                  <Typography variant="h6">{dentists.firstName} {dentists.middleName} {dentists.lastname} {dentists.prefix}</Typography>
                 </Stack>
               </Grid>
 

@@ -19,7 +19,7 @@ const DentistMolino = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = `${process.env.REACT_APP_API_URL}/api/dentists/Molino`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/Molino`;
 
     const requestOptions = {
       signal: controller.signal,

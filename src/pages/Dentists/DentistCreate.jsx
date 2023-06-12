@@ -28,6 +28,8 @@ const DentistCreate = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "prc_number" || name === "ptr_number") {
@@ -38,10 +40,16 @@ const DentistCreate = () => {
     }
   };
 
+
+
+
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
     setProfilePicture(file);
   };
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,6 +88,9 @@ const DentistCreate = () => {
   };
 
   function formatPhoneNumber(phoneNumber) {
+    if (!phoneNumber) {
+      return ""; // Return an empty string or any default value when phoneNumber is undefined
+    }
     const cleaned = phoneNumber.replace(/\D/g, "");
     const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
     if (match) {
@@ -99,7 +110,10 @@ const DentistCreate = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5, px: 3, py: 5, maxWidth: 500, margin: "0 auto" }}>
             <Stack spacing={2}>
-              <TextField helperText="Full Name" variant="standard" type="text" required name="name" onChange={handleChange} value={dentists.name} />
+              <TextField helperText="First Name" variant="standard" type="text" required name="firstName" onChange={handleChange} value={dentists.firstName} />
+              <TextField helperText="Last Name" variant="standard" type="text" required name="lastname" onChange={handleChange} value={dentists.lastname} />
+              <TextField helperText="Middle Name" variant="standard" type="text" name="middleName" onChange={handleChange} value={dentists.middleName} />
+              <TextField helperText="prefix" variant="standard" type="text" name="prefix" onChange={handleChange} value={dentists.prefix} />
               <TextField helperText="Email" variant="standard" type="email" name="email" value={dentists.email} onChange={handleChange} />
               <TextField helperText="Password" variant="standard" type={showPassword ? "text" : "password"} name="password" value={dentists.password} onChange={handleChange}
                 InputProps={{
@@ -112,22 +126,17 @@ const DentistCreate = () => {
                   ),
                 }}
               />
-              <TextField helperText="Contact Number" variant="standard" type="tel" required name="contact_number" onChange={(e) => {
-                  const phoneNumber = e.target.value.replace(/\D/g, "");
-                  const formattedNumber = formatPhoneNumber(phoneNumber);
-                  setDentists((prev) => ({ ...prev, contact_number: formattedNumber }));
-                }}
-                value={formatPhoneNumber(dentists.contact_number)}
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">+63</InputAdornment>,
-                }}
-                inputProps={{
-                  pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
-                  onInvalid: (e) => {
-                    e.target.setCustomValidity("Please input a valid 10-digit phone number in the format 000-000-0000");
-                  },
-                }}
-              />
+                <TextField fullWidth helperText="Contact Number" variant="standard" type="tel" required unique name="contact_number" onChange={(e) => {
+                    const phoneNumber = e.target.value.replace(/\D/g, "");
+                    const formattedNumber = phoneNumber.slice(-10);
+                    setDentists((prev) => ({ ...prev, contact_number: formattedNumber }));
+                  }}
+                  value={formatPhoneNumber(dentists.contact_number)} InputProps={{ startAdornment: <InputAdornment position="start">+63</InputAdornment> }}
+                  inputProps={{ pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", onInvalid: (e) => {
+                      e.target.setCustomValidity("Please input a valid 10-digit phone number");
+                    },
+                  }}
+                />
               <TextField helperText="Birthday" variant="standard" type="date" required name="birthday" onChange={handleChange} value={dentists.birthday} />
               <TextField helperText="Select Gender" select variant="standard" type="text" required name="gender" onChange={handleChange} value={dentists.gender}>
                 <MenuItem value="Male">Male</MenuItem>

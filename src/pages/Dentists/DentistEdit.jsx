@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { Typography, Box, Button, Stack, TextField, Grid, Container } from "@mui/material";
+import { Typography, Box, Button, Stack, TextField, Grid, Container, MenuItem } from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -47,7 +47,7 @@ const DentistEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = `http://localhost:5000/api/dentists/:id`;
+    let url = `http://localhost:5000/api/dentists/`;
 
     const requestOptions = {
       method: "PUT",
@@ -55,15 +55,18 @@ const DentistEdit = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: dentists.name,
+        firstName: dentists.firstName,
+        middleName: dentists.middleName,
+        lastname: dentists.lastname,
+        prefix: dentists.prefix,
         email: dentists.email,
         contact_number: dentists.contact_number,
         birthday: dentists.birthday,
         prc_number: dentists.prc_number,
         ptr_number: dentists.ptr_number,
         branches: dentists.branches,
+        gender: dentists.gender,
         Profile_pic: dentists.Profile_pic,
-        Resume: dentists.Resume,
         id: id,
       }),
     };
@@ -95,7 +98,16 @@ const DentistEdit = () => {
           <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit} sx={{ mt: 5, px: 3, py: 5, maxWidth: 500, margin: "0 auto" }}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item xs={12}>
-                <TextField helperText="Name" variant="standard" type="text" required name="name" onChange={handleChanged} value={dentists.name} fullWidth/>
+                <TextField helperText="First Name" variant="standard" type="text" required name="firstName" onChange={handleChanged} value={dentists.firstName} fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField helperText="Last Name" variant="standard" type="text" required name="lastname" onChange={handleChanged} value={dentists.lastname} fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField helperText="Middle Name" variant="standard" type="text"  name="middleName" onChange={handleChanged} value={dentists.middleName} fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField helperText="Prefix, Sr. Jr. IV etc." variant="standard" type="text"  name="prefix" onChange={handleChanged} value={dentists.prefix} fullWidth/>
               </Grid>
               <Grid item xs={12}>
                 <TextField helperText="Email" variant="standard" type="email" name="email" onChange={handleChanged} value={dentists.email} fullWidth/>
@@ -126,8 +138,22 @@ const DentistEdit = () => {
                   InputProps={{ startAdornment: <InputAdornment position="start">PTR-</InputAdornment>,}}/>
               </Grid>
               <Grid item xs={12}>
-                <TextField fullWidth helperText="Branch" variant="standard" type="text" name="branches" onChange={handleChanged} value={dentists.branches}/>
+              <TextField fullWidth helperText="Select Gender" select variant="standard" type="text" required name="gender" onChange={handleChanged} value={dentists.gender}>
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </TextField>
               </Grid>
+              <Grid item xs={12}>
+              <TextField helperText="Select Location" select variant="standard" type="text" fullWidth required name="branches" onChange={handleChanged} value={dentists.branches}>
+                <MenuItem value="Carmona">Carmona</MenuItem>
+                <MenuItem value="Molino">Molino</MenuItem>
+                <MenuItem value="Rosario">Rosario</MenuItem>
+                <MenuItem value="Dasmarinas">Dasmarinas</MenuItem>
+                <MenuItem value="Las pinas">Las Pinas</MenuItem>
+              </TextField>
+              </Grid>
+
             </Grid>
             <Stack direction="row" spacing={2} justifyContent="center" sx={{ px: 2, pb: 2, pt: 2 }}>
               <Button type="submit" value="Update" variant="outlined" size="large">

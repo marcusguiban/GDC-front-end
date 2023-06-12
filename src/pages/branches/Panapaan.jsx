@@ -19,7 +19,7 @@ const DentistPanapaan = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = `${process.env.REACT_APP_API_URL}/api/dentists/panapaan`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/panapaan`;
 
     const requestOptions = {
       signal: controller.signal,

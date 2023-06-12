@@ -12,6 +12,7 @@ import { Link} from "react-router-dom";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 
+
 const DentistList = () => {
 
   const [dentists, setDentists] = useState([]);
@@ -55,7 +56,6 @@ const DentistList = () => {
       controller.abort();
     };
   }, []);
-
   return (
     <>
       <NavbarMUI />
@@ -75,9 +75,6 @@ const DentistList = () => {
                     <TableCell>Name</TableCell>
                     <TableCell>Email</TableCell>
                     <TableCell>Contact Number</TableCell>
-                    <TableCell>Age</TableCell>
-                    <TableCell>PRC Number</TableCell>
-                    <TableCell>PTR Number</TableCell>
                     <TableCell>Branch</TableCell>
                     <TableCell>Actions</TableCell>
                   </TableRow>
@@ -89,12 +86,9 @@ const DentistList = () => {
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell>{dentist.dentistsId}</TableCell>
-                      <TableCell>{dentist.name}</TableCell>
+                      <TableCell>{dentist.firstName} {dentist.middleName} {dentist.lastname} {dentist.prefix}</TableCell>
                       <TableCell>{dentist.email}</TableCell>
                       <TableCell>+63 {dentist.contact_number}</TableCell>
-                      <TableCell>{dentist.age}</TableCell>
-                      <TableCell>{dentist.prc_number}</TableCell>
-                      <TableCell>{dentist.ptr_number}</TableCell>
                       <TableCell>{dentist.branches}</TableCell>
                       <TableCell>
                         <Link to={`/Dentists/${dentist._id}`} style={{ color: 'pink' }}>

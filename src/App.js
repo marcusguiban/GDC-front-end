@@ -22,7 +22,9 @@ import PatientView from './pages/Patients/PatientView';
 import PatientEdit from './pages/Patients/PatientEdit';
 import PatientCreate from './pages/Patients/PatientCreate';
 import CreateDentalChartPage from './pages/DentalCharts/DentalChartCreate';
-
+import AppointmentList from './pages/Appointments/AppointmentList';
+import AppointmentView from './pages/Appointments/AppointmentsView';
+import AppointmentCreate from './pages/Appointments/AppointmentCreate';
 function App() {
   return (
     <>
@@ -51,6 +53,10 @@ function App() {
        <Route path="/Patients/:id" element={<PatientView />}></Route>
        <Route path="/Patients/edit/:id" element={<PatientEdit />}></Route>
        <Route path="/Patients/new" element={<PatientCreate />}></Route>
+
+       <Route path="/Appointments" element={<AppointmentList />}></Route>
+       <Route path="/Appointments/:id" element={<AppointmentView />}></Route>
+       <Route path="/Appointments/new" element={<AppointmentCreate />}></Route>
 
        <Route path="/DentalCharts/new" element={<CreateDentalChartPage />}></Route>
     </Routes>

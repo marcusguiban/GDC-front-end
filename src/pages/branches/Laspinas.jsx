@@ -19,7 +19,7 @@ const DentistLasPinas = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = `${process.env.REACT_APP_API_URL}/api/dentists/LasPinas`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/LasPinas`;
 
     const requestOptions = {
       signal: controller.signal,
