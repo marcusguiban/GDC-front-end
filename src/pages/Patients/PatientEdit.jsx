@@ -146,7 +146,7 @@ const PatientEdit = () => {
             <Button type="submit" value="Update" variant="outlined" size="large">
               Edit
             </Button>
-            <Link to={`/patient/edit/Change-password/${patient._id}`}>
+            <Link to={`/patients/edit/Change-password/${patient._id}`}>
                   <Button variant="contained" color="primary">
                     Change password
                   </Button>

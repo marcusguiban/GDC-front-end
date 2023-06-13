@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import HomePage from './pages/Utilities/homepage';
 import NotFound from './pages/Utilities/NotFound';
+import ContactUsEmailSender from './pages/Utilities/ContactUs';
+
 
 import DentistList from './pages/Dentists/DentistsList';
 import DentistCreate from './pages/Dentists/DentistCreate';
@@ -15,16 +17,22 @@ import DentistLasPinas from './pages/branches/Laspinas';
 import DentistMolino from './pages/branches/Molino';
 import DentistCarmona from './pages/branches/Carmona';
 import ChangePassword from './pages/Dentists/DentistChangePassword';
-import ContactUsEmailSender from './pages/Utilities/ContactUs';
+
 import DentistUpdate from './pages/Dentists/DentistUpdate';
 import PatientList from './pages/Patients/PatientList';
 import PatientView from './pages/Patients/PatientView';
 import PatientEdit from './pages/Patients/PatientEdit';
 import PatientCreate from './pages/Patients/PatientCreate';
+import PatientChangePassword from './pages/Patients/PatientChangePassword';
+
+
 import CreateDentalChartPage from './pages/DentalCharts/DentalChartCreate';
+
+
 import AppointmentList from './pages/Appointments/AppointmentList';
 import AppointmentView from './pages/Appointments/AppointmentsView';
 import AppointmentCreate from './pages/Appointments/AppointmentCreate';
+
 function App() {
   return (
     <>
@@ -53,6 +61,7 @@ function App() {
        <Route path="/Patients/:id" element={<PatientView />}></Route>
        <Route path="/Patients/edit/:id" element={<PatientEdit />}></Route>
        <Route path="/Patients/new" element={<PatientCreate />}></Route>
+       <Route path="/Patients/edit/Change-password/:id" element={<PatientChangePassword />}></Route>
 
        <Route path="/Appointments" element={<AppointmentList />}></Route>
        <Route path="/Appointments/:id" element={<AppointmentView />}></Route>

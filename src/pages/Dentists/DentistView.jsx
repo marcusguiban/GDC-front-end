@@ -13,7 +13,7 @@ const DentistsView = () => {
   const [prevId, setPrevId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
-
+  const [profilePicture, setProfilePicture] = useState(null);
   useEffect(() => {
     let url = `http://localhost:5000/api/dentists/${id}`;
     const controller = new AbortController();
@@ -75,7 +75,7 @@ const closeModal = () => {
   setIsModalOpen(false);
   setModalImage(null);
 };
-  const [profilePicture, setProfilePicture] = useState(null);
+
   const handleProfilePictureChange = (event) => {
     const file = event.target.files[0];
     setProfilePicture(file);
@@ -141,12 +141,7 @@ const closeModal = () => {
     <>
       <NavbarMUI />
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: "100vh",
+        sx={{display: "flex",flexDirection: "column",alignItems: "center",justifyContent: "center",minHeight: "100vh",
           backgroundColor: "#F2E7EB",
           fontFamily: "cursive",
         }}
