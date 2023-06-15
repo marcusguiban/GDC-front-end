@@ -1,12 +1,12 @@
-import { AppBar, Box, Button, Container, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Toolbar, Typography, Stack } from "@mui/material";
+import { AppBar, Box, Button, Container, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Toolbar, Typography, Stack, } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
+import { useState, React} from "react";
 import { Link } from "react-router-dom";
-import ButtonGroup from '@mui/material/ButtonGroup';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MapIcon from '@mui/icons-material/Map';
 import Logo from "../../images/navbar-logo.jpg";
+
 
 export const NavbarMUI = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,36 +18,36 @@ export const NavbarMUI = () => {
   const drawer = (
     <div>
       <List>
-        <ListItem  component={Link} to="/login">
+                <ListItem >
+                <img src={Logo} width="100" height="100" alt="post"></img> 
+        </ListItem>
+      <ListItem  component={Link} to="/login">
           <ListItemText primary="Login" />
-        </ListItem>
-        <ListItem  component={Link} to="/register">
-          <ListItemText primary="Register" />
-        </ListItem>
-        <ListItem  component={Link} to="/overview">
-          <ListItemText primary="Overview" />
         </ListItem>
         <ListItem  component={Link} to="/dentists">
           <ListItemText primary="Doctors" />
         </ListItem>
-        <ListItem  component={Link} to="/appointment/new">
-          <ListItemText primary="Set an Appointment" />
+        <ListItem  component={Link} to="/Dentists/Panapaan">
+          <ListItemText primary="Panapaan" />
         </ListItem>
-        <ListItem  component={Link} to="/patients/">
-          <ListItemText primary="New Patient" />
+        <ListItem  component={Link} to="/Dentists/carmona">
+          <ListItemText primary="Carmona" />
+        </ListItem>
+        <ListItem  component={Link} to="/Dentists/dasmarinas">
+          <ListItemText primary="Dasmarinas" />
+        </ListItem>
+        <ListItem  component={Link} to="/Dentists/Rosario">
+          <ListItemText primary="Rosario" />
+        </ListItem>
+        <ListItem  component={Link} to="/Dentists/Molino">
+          <ListItemText primary="Molino" />
+        </ListItem>
+        <ListItem  component={Link} to="/Dentists/laspinas">
+          <ListItemText primary="Las Pinas" />
         </ListItem>
         <ListItem>
-          <ButtonGroup variant="contained" aria-label="outlined primary button group">
-            <Button component={Link} to="/panapaan">Panapaan</Button>
-            <Button component={Link} to="/carmona">Carmona</Button>
-            <Button component={Link} to="/dasmarinas">Dasmarinas</Button>
-            <Button component={Link} to="/rosario">Rosario</Button>
-            <Button component={Link} to="/molino">Molino</Button>
-          </ButtonGroup>
-        </ListItem>
-        <ListItem>
-          <Stack direction="row" spacing={5} color="white" sx={{ px: 10 }}>
-            <Link href="https://www.facebook.com/guibandentalclinic" style={{ color: 'pink', textDecoration: 'none' }}>
+          <Stack direction="row" spacing={4} color="white" >
+          <Link href="https://www.facebook.com/guibandentalclinic" style={{ color: 'pink', textDecoration: 'none' }}>
               <FacebookIcon fontSize='large'></FacebookIcon>
             </Link>
             <Link href="https://www.instagram.com/guibandentalclinic/?hl=en" style={{ color: 'pink', textDecoration: 'none' }}>
@@ -84,11 +84,7 @@ export const NavbarMUI = () => {
             <Hidden mdDown>
               <Box sx={{ display: { xs: "none", md: "flex", justifyContent: 'center' } }}>
                 <Stack direction={"row"} spacing={2}>
-                  <Link to="#"><Button sx={{ color: "#6C1444" }}>Login</Button></Link>
-                  <Link to="#"><Button sx={{ color: "white" }}>Register</Button></Link>
-                  <Link to="/appointments"><Button sx={{ color: "white" }}>Appointments</Button></Link>
                   <Link to="/dentists"><Button sx={{ color: "white" }}>Dentists</Button></Link>
-                  <Link to="/patients"><Button sx={{ color: "white" }}>Patients</Button></Link>
                 </Stack>
               </Box>
             </Hidden>
@@ -105,6 +101,9 @@ export const NavbarMUI = () => {
             >
               {drawer}
             </Drawer>
+            <Box sx={{ mr: 2, display: { xs: "flex", md: "none" }}}>
+                <img src={Logo} width="100" height="100" alt="post"></img> 
+                </Box>
           </Toolbar>
         </Container>
       </AppBar>

@@ -1,7 +1,7 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
 import { useForm } from 'react-hook-form';
-
+import { Typography,  Button, Stack, Container, TextField, Grid } from "@mui/material";
 const ContactUsEmailSender = () =>  {
   const {
     register,
@@ -36,27 +36,86 @@ const ContactUsEmailSender = () =>  {
   };
 
   return (
-    <div className="App">
-      <h1>Contact Form</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Name</label>
-          <input type="text" {...register('name', { required: true })} />
-          {errors.name && <span>This field is required</span>}
-        </div>
-        <div>
-          <label>Email</label>
-          <input type="email" {...register('email', { required: true })} />
-          {errors.email && <span>This field is required</span>}
-        </div>
-        <div>
-          <label>Message</label>
-          <textarea {...register('message', { required: true })} />
-          {errors.message && <span>This field is required</span>}
-        </div>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
+    <>
+    <Container sx={{ pt: 5, mb: 5 }}>
+      <Typography variant="h4" align="center" color="palevioletred"
+      sx={{
+        fontSize: {
+          xs: "20px",
+          sm: "28px",
+          md: "36px",
+          lg: "44px",
+        },
+        py: { xs: 1, sm: 2 }, px:{ xs: 1, sm: 2 }
+      }}>
+            Contact us
+          </Typography>
+      
+          <form onSubmit={handleSubmit(onSubmit)} >
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} justifyContent="center">
+        <Grid item xs={12} md={6}>
+          <Stack spacing={2} >
+            <TextField
+              label="Name"
+              type="text"
+              
+              {...register('name', { required: true })}
+              error={!!errors.name}
+              helperText={errors.name ? 'This field is required' : ''}
+              sx={{
+                width: '100%',
+                '@media (min-width: 600px)': {
+                  width: '400px',
+                },
+              }}
+            />
+            <TextField
+              label="Email"
+              type="email"
+              {...register('email', { required: true })}
+              error={!!errors.email}
+              helperText={errors.email ? 'This field is required' : ''}
+              sx={{
+                width: '100%',
+                '@media (min-width: 600px)': {
+                  width: '400px',
+                },
+              }}
+            />
+          </Stack>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Stack spacing={1} >
+            <TextField
+              label="Message"
+              multiline
+              rows={4}
+              {...register('message', { required: true })}
+              error={!!errors.message}
+              helperText={errors.message ? 'This field is required' : ''}
+              sx={{
+                width: '100%',
+                '@media (min-width: 600px)': {
+                  width: '400px',
+                },
+              }}
+            />
+            <Button size="lg" variant="outlined" color="secondary" type="submit"              
+                          sx={{
+                            width: '100%',
+                            '@media (min-width: 600px)': {
+                              width: '400px',
+                            },
+                          }}>
+              Send Message
+            </Button>
+          </Stack>
+        </Grid>
+      </Stack>
+    </form>
+      
+      </Container>
+    </>
   );
 }
 
