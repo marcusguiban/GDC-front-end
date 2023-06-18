@@ -9,8 +9,6 @@ import Paper from '@mui/material/Paper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Button, Container, Typography, Stack, } from "@mui/material";
 import { Link} from "react-router-dom";
-import { NavbarMUI } from "../Utilities/Navbar";
-import { FooterMUI } from "../Utilities/footer";
 
 const PatientList = () => {
 
@@ -58,8 +56,8 @@ const PatientList = () => {
 
   return (
     <>
-      <NavbarMUI />
-      <Container sx={{ py: 10 }}>
+
+      <Container>
         <Typography variant="h4" align="center" color={"palevioletred"}> Current Patients </Typography>
 
         {loading ? (
@@ -68,16 +66,16 @@ const PatientList = () => {
           <Container sx={{ py: 10 }}>
 
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table sx={{ minWidth: 200 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>ID</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>ID</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Contact Number</TableCell>
-                    <TableCell>Age</TableCell>
-                    <TableCell>Branch</TableCell>
-                    <TableCell>Actions</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>Email</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Contact Number</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Age</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>Branch</TableCell>
+                    <TableCell>View</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -86,12 +84,12 @@ const PatientList = () => {
                       key={patient.id}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <TableCell>{patient.patientId}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{patient.patientId}</TableCell>
                       <TableCell>{patient.firstName} {patient.middleName} {patient.lastname} {patient.prefix}</TableCell>
-                      <TableCell>{patient.email}</TableCell>
-                      <TableCell>+63 {patient.contactNumber}</TableCell>
-                      <TableCell>{patient.age}</TableCell>
-                      <TableCell>{patient.branches}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{patient.email}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>+63 {patient.contactNumber}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{patient.age}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{patient.branches}</TableCell>
                       <TableCell>
                         <Link to={`/patients/${patient._id}`} style={{ color: 'pink' }}>
                           <VisibilityIcon />
@@ -112,7 +110,7 @@ const PatientList = () => {
           </Container>
         )}
       </Container>
-      <FooterMUI />
+
     </>
   );
 };

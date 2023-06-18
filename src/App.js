@@ -5,6 +5,8 @@ import HomePage from './pages/Utilities/homepage';
 import AboutUsPage from './pages/GDCOneLuxDental/AboutUs';
 import DentistsViewPublic from './pages/PublicPages/DentistViewPublic';
 
+import OverviewAdmin from './pages/AdminView/Overview';
+
 import DentistList from './pages/Dentists/DentistsList';
 import DentistCreate from './pages/Dentists/DentistCreate';
 import DentistsView from './pages/Dentists/DentistView';
@@ -62,6 +64,7 @@ function App() {
 
 
        <Route element = {<SecureRoute />}>
+       <Route path="/OverView" element={<OverviewAdmin />}></Route>
        <Route path="/Dentists/edit/:id" element={<DentistEdit />}></Route>
        <Route path="/Dentists/edit/Change-password/:id" element={<ChangePassword />}></Route>
        <Route path="/Dentists/edit/update/:id" element={<DentistUpdate />}></Route>

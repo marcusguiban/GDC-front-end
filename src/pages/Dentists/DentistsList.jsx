@@ -7,10 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Button, Container, Typography, Stack, Box, } from "@mui/material";
+import { Button, Container, Typography, Stack, } from "@mui/material";
 import { Link} from "react-router-dom";
-import { NavbarMUI } from "../Utilities/Navbar";
-import { FooterMUI } from "../Utilities/footer";
+
 
 
 const DentistList = () => {
@@ -57,10 +56,8 @@ const DentistList = () => {
     };
   }, []);
   return (
-    <>
-      <NavbarMUI />
-      <Box className="background"> 
-      <Container sx={{ py: 10 }}>
+    <> 
+      <Container sx={{ pt: 10 }}>
         <Typography variant="h4" align="center" color={"palevioletred"}> Current Dentists </Typography>
 
         {loading ? (
@@ -107,8 +104,6 @@ const DentistList = () => {
           </Container>
         )}
       </Container>
-      </Box>
-      <FooterMUI />
     </>
   );
 };

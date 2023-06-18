@@ -8,7 +8,7 @@ import { FooterMUI } from "../Utilities/footer";
 export default function Login() {
   const usernameRef = useRef();
   const passwordRef = useRef();
-  const { setToken, setIsAuthenticated, isAuthenticated } = useAuth();
+  const { setToken, setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   async function handleLogin(e) {
@@ -31,21 +31,14 @@ export default function Login() {
 
     const fetchResponse = await fetch(url, requestOptions);
 
-    console.log("status code")
-    console.log(fetchResponse.status)
-
 
     if (fetchResponse.status === 200) {
       let data = await fetchResponse.json();
       setIsAuthenticated(true);
 
-      
-      console.log(isAuthenticated);
-      console.log("line 33");
-
 
       setToken(data.token);
-      navigate("/dentists");
+      navigate("/overview");
     } else {
       alert("Incorrect credential");
     }

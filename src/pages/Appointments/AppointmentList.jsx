@@ -9,8 +9,6 @@ import Paper from '@mui/material/Paper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Button, Container, Typography, Stack, } from "@mui/material";
 import { Link} from "react-router-dom";
-import { NavbarMUI } from "../Utilities/Navbar";
-import { FooterMUI } from "../Utilities/footer";
 
 const AppointmentList = () => {
 
@@ -43,27 +41,27 @@ const AppointmentList = () => {
 
   return (
     <>
-      <NavbarMUI />
-      <Container sx={{ py: 10 }}>
+
         <Typography variant="h4" align="center" color={"palevioletred"}> Upcoming Appointments </Typography>
         {loading ? (
           <Typography variant="h6" align="center" color={"palevioletred"}> Loading...</Typography>
         ) : (
           <Container sx={{ py: 10 }}>
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table sx={{ minWidth: 200 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell>Date</TableCell>
                     <TableCell>Time</TableCell>
-                    <TableCell>Patient Name</TableCell>
-                    <TableCell>Patient ID</TableCell>
-                    <TableCell>Patient Email</TableCell>
-                    <TableCell>Patient Contact Number</TableCell>
-                    <TableCell>Dentist Name</TableCell>
-                    <TableCell>Dentist ID</TableCell>
-                    <TableCell>Branch</TableCell>
-                    <TableCell>Approved</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', sm:'table-cell', md: 'table-cell' } }}>Patient Name</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Patient ID</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Patient Email</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Patient Contact Number</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', sm:'table-cell', md: 'table-cell' } }}>Dentist Name</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Dentist ID</TableCell>
+                    <TableCell >Branch</TableCell>
+                    <TableCell sx={{ display: { xs: 'none', lg: 'table-cell' } }}>Approved</TableCell>
+                    <TableCell>View</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -80,14 +78,14 @@ const AppointmentList = () => {
                     })}
                     </TableCell>
                       <TableCell>{appointments.time}</TableCell>
-                      <TableCell>{appointments.patientName}</TableCell>
-                      <TableCell>{appointments.PatientID}</TableCell>
-                      <TableCell>{appointments.PatientEmail}</TableCell>
-                      <TableCell>{appointments.PatientContactNumber}</TableCell>
-                      <TableCell>{appointments.dentistName}</TableCell>
-                      <TableCell>{appointments.dentistID}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{appointments.patientName}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{appointments.PatientID}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{appointments.PatientEmail}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{appointments.PatientContactNumber}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{appointments.dentistName}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{appointments.dentistID}</TableCell>
                       <TableCell>{appointments.branch}</TableCell>
-                      <TableCell>{appointments.Approved}</TableCell>
+                      <TableCell sx={{ display: { xs: 'none', lg: 'table-cell' } }}>{appointments.Approved}</TableCell>
                       <TableCell>
                         <Link to={`/appointments/${appointments._id}`} style={{ color: 'pink' }}>
                           <VisibilityIcon />
@@ -105,8 +103,6 @@ const AppointmentList = () => {
             </Stack>
           </Container>
         )}
-      </Container>
-      <FooterMUI />
     </>
   );
 };

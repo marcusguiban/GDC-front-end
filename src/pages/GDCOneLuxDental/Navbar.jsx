@@ -27,6 +27,15 @@ export const NavbarMUI = () => {
           <ListItem >
                 <img src={Logo} width="100%" height="100%" alt="post"></img> 
         </ListItem>
+                <ListItem  component={Link} to="/" >
+          <ListItemText secondary="Home" />
+        </ListItem>
+        <ListItem  component={Link} to="/AboutUs">
+          <ListItemText secondary="About Us" />
+        </ListItem>
+        <ListItem  component={Link} to="/Appointments">
+          <ListItemText secondary="Appointments" />
+        </ListItem>
         <ListItem  component={Link} to="/dentists">
           <ListItemText secondary="Dentists" />
         </ListItem>

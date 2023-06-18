@@ -3,7 +3,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useState, React} from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../images/navbar-logo.jpg";
-    
 
 export const NavbarMUI = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -27,8 +26,14 @@ export const NavbarMUI = () => {
           <ListItem >
                 <img src={Logo} width="100%" height="100%" alt="post"></img> 
         </ListItem>
-      <ListItem  component={Link} to="/login" >
-          <ListItemText secondary="Login" />
+        <ListItem  component={Link} to="/" >
+          <ListItemText secondary="Home" />
+        </ListItem>
+        <ListItem  component={Link} to="/patients">
+          <ListItemText secondary="Patients" />
+        </ListItem>
+        <ListItem  component={Link} to="/Appointments">
+          <ListItemText secondary="Appointments" />
         </ListItem>
         <ListItem  component={Link} to="/dentists">
           <ListItemText secondary="Dentists" />
@@ -51,13 +56,14 @@ export const NavbarMUI = () => {
         <ListItem  component={Link} to="/Dentists/laspinas">
           <ListItemText secondary="GDC One Lux Dental" />
         </ListItem>
-        <ListItem  component={Link} to="/patients">
-          <ListItemText secondary="Patients" />
-        </ListItem>
-        <ListItem  component={Link} to="/Appointments">
-          <ListItemText secondary="Appointments" />
-        </ListItem>
+
       </List>
+      <ListItem  component={Link} to="/login" >
+          <ListItemText secondary="Login" />
+        </ListItem>
+        <ListItem  component={Link} to="/overview" >
+          <ListItemText secondary="Overview" />
+        </ListItem>
     </div>
   );
 
