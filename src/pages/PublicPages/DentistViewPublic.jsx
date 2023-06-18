@@ -77,7 +77,7 @@ const closeModal = () => {
   const handleProfilePictureClick = () => {
     openModal(imgurl);
   };
-  const imgurl = `${process.env.IMG_URL}/${dentists.profilePicture}`;
+  const imgurl = `https://gdc-back-end.vercel.app/${dentists.profilePicture}`;
   const copyText = () => {
     navigator.clipboard.writeText(dentists.dentistsId);
   };
