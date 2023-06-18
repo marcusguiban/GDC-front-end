@@ -14,7 +14,7 @@ const ChangePassword = () => {
   });
   const navigate = useNavigate();
   useEffect(() => {
-    let url = `https://gdc-back-end.vercel.app/api/dentists/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/${id}`;
 
     const controller = new AbortController();
 
@@ -44,7 +44,7 @@ const ChangePassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = `https://gdc-back-end.vercel.app/api/dentists/Change-password`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/Change-password`;
 
     const requestOptions = {
       method: "PUT",

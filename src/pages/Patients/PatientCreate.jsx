@@ -27,7 +27,7 @@ const PatientCreate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("https://gdc-back-end.vercel.app/api/patients", {
+    fetch(`${process.env.REACT_APP_API_URL}/patients`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

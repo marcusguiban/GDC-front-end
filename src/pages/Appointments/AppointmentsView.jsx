@@ -14,7 +14,7 @@ const AppointmentView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `https://gdc-back-end.vercel.app/api/appointments/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/appointments/${id}`;
 
     const controller = new AbortController();
 
@@ -43,7 +43,7 @@ const AppointmentView = () => {
 
   const handleDelete = (e) => {
     if (window.confirm("Are you really sure you want to delete this record?")) {
-      let url = `http://localhost:5000/api/appointments`;
+      let url = `${process.env.REACT_APP_API_URL}/appointments`;
 
       const requestOptions = {
         method: "DELETE",

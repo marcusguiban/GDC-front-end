@@ -18,7 +18,7 @@ const PatientEdit = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `https://gdc-back-end.vercel.app/api/patients/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/patients/${id}`;
 
     const controller = new AbortController();
 
@@ -46,7 +46,7 @@ const PatientEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = `http://localhost:5000/api/patients`;
+    let url = `${process.env.REACT_APP_API_URL}/patients`;
 
     const requestOptions = {
       method: "PUT",

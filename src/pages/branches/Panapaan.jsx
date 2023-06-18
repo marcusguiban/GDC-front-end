@@ -21,7 +21,7 @@ const DentistPanapaan = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = `https://gdc-back-end.vercel.app/api/dentists/panapaan`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/panapaan`;
 
     const requestOptions = {
       signal: controller.signal,

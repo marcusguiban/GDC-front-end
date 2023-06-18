@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Button, Container, Typography, Stack, } from "@mui/material";
+import { Button, Container, Typography, Stack, Box, } from "@mui/material";
 import { Link} from "react-router-dom";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
@@ -22,7 +22,7 @@ const DentistList = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = `https://gdc-back-end.vercel.app/api/dentists`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists`;
 
     const requestOptions = {
       signal: controller.signal,
@@ -59,6 +59,7 @@ const DentistList = () => {
   return (
     <>
       <NavbarMUI />
+      <Box className="background"> 
       <Container sx={{ py: 10 }}>
         <Typography variant="h4" align="center" color={"palevioletred"}> Current Dentists </Typography>
 
@@ -106,6 +107,7 @@ const DentistList = () => {
           </Container>
         )}
       </Container>
+      </Box>
       <FooterMUI />
     </>
   );

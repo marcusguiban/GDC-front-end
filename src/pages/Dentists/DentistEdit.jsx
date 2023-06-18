@@ -13,7 +13,7 @@ const DentistEdit = () => {
 
 
   useEffect(() => {
-    let url = `https://gdc-back-end.vercel.app/api/dentists/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/dentists/${id}`;
 
     const controller = new AbortController();
     const requestOptions = {

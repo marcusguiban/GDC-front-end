@@ -13,7 +13,7 @@ const PatientView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `https://gdc-back-end.vercel.app/api/patients/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/patients/${id}`;
 
     const controller = new AbortController();
 
@@ -58,7 +58,7 @@ const PatientView = () => {
 
   const handleDelete = (e) => {
     if (window.confirm("Are you really sure you want to delete this record?")) {
-      let url = `http://localhost:5000/api/patients`;
+      let url = `${process.env.REACT_APP_API_URL}/patients`;
 
       const requestOptions = {
         method: "DELETE",
