@@ -2,9 +2,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import HomePage from './pages/Utilities/homepage';
-import NotFound from './pages/Utilities/NotFound';
-import ContactUsEmailSender from './pages/Utilities/ContactUs';
-
+import AboutUsPage from './pages/GDCOneLuxDental/AboutUs';
+import DentistsViewPublic from './pages/PublicPages/DentistViewPublic';
 
 import DentistList from './pages/Dentists/DentistsList';
 import DentistCreate from './pages/Dentists/DentistCreate';
@@ -33,14 +32,25 @@ import AppointmentList from './pages/Appointments/AppointmentList';
 import AppointmentView from './pages/Appointments/AppointmentsView';
 import AppointmentCreate from './pages/Appointments/AppointmentCreate';
 
+import Login from './pages/PublicPages/Login';
+
+import SecureRoute from "./SecureRoutes"; 
+import AuthContextProvider  from "./pages/Contexts/AuthContex";
 function App() {
   return (
     <>
+    <AuthContextProvider>
+
+    
     <BrowserRouter>
     <Routes>
        <Route path="/" element={<HomePage />}></Route>
-       <Route path="*" element={<NotFound />}></Route>
+       <Route path="*" element={<HomePage />}></Route>
+       <Route path="/GDC-One-Lux-Dental/AboutUs" element={<AboutUsPage />}></Route>
 
+       <Route path="/Dentists/public/:id" element={<DentistsViewPublic />}></Route>
+
+       <Route path="/Login" element={<Login />}></Route>
        <Route path="/Dentists/Panapaan" element={<DentistPanapaan />}></Route>
        <Route path="/Dentists/Dasmarinas" element={<DentistDasmarinas />}></Route>
        <Route path="/Dentists/Rosario" element={<DentistRosario />}></Route>
@@ -48,8 +58,10 @@ function App() {
        <Route path="/Dentists/Carmona" element={<DentistCarmona />}></Route>
        <Route path="/Dentists/Laspinas" element={<DentistLasPinas />}></Route>
 
-       <Route path="/ContactUs" element={<ContactUsEmailSender />}></Route>
 
+
+
+       <Route element = {<SecureRoute />}>
        <Route path="/Dentists/edit/:id" element={<DentistEdit />}></Route>
        <Route path="/Dentists/edit/Change-password/:id" element={<ChangePassword />}></Route>
        <Route path="/Dentists/edit/update/:id" element={<DentistUpdate />}></Route>
@@ -68,8 +80,10 @@ function App() {
        <Route path="/Appointments/new" element={<AppointmentCreate />}></Route>
 
        <Route path="/DentalCharts/new" element={<CreateDentalChartPage />}></Route>
+       </Route>
     </Routes>
 </BrowserRouter>
+</AuthContextProvider>
     </>
 
   );

@@ -7,26 +7,22 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Button, Container, Typography, Stack } from "@mui/material";
+import { Container, Typography, Box, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
-
+import map from "../../images/rosarioMap.jpg";
+import FBpost1 from "../../images/fbpost1.jpg";
+import FBpost2 from "../../images/fbpost2.jpg";
 const DentistRosario = () => {
   const [dentists, setdentists] = useState([]);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     const controller = new AbortController();
-
     let url = `${process.env.REACT_APP_API_URL}/dentists/Rosario`;
-
     const requestOptions = {
       signal: controller.signal,
-      method: "GET"
-
-    };
-
+      method: "GET"};
     setLoading(true);
     fetch(url, requestOptions)
       .then((response) => response.json())
@@ -34,7 +30,6 @@ const DentistRosario = () => {
         setdentists(json);
         setLoading(false);
       });
-
     return () => {
       controller.abort();
     };
@@ -43,25 +38,42 @@ const DentistRosario = () => {
   return (
     <>
     <NavbarMUI />
+    <Box  className="background">
     <Container sx={{py:10}}>
-    <Typography variant="h4" align="center" color={"palevioletred"}> Current Dentists </Typography>
-
+    <Typography variant="h4" align="center" color={"palevioletred"} sx={{py:5}}> Guiban Dental Clinic Rosario </Typography>
+    <Grid container>
+      <Grid item md={6} sm={12} align="center">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3864.3214035110514!2d120.85621096193789!3d14.408626681578346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33962dd3cd63022f%3A0xb8f7418a668660e5!2sGuiban%20Dental%20Clinic%20Rosario%20Branch!5e0!3m2!1sen!2sph!4v1682414377794!5m2!1sen!2sph" 
+        width="100%" 
+        height={400} 
+        style={{ border: "0" }}
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Rosario googlemaps">
+        </iframe>
+        <Typography variant="h5" align="center" color={"palevioletred"} sx={{py:5}}> We are located at RRE Bld, Blk4 Lot 14 Costaverde Subd. Tejeros Convention Rosario, Cavite </Typography>
+      </Grid>
+      <Grid item md={6} sm={12} align="center">
+        <img src={map} className="map" alt="Rosario map"></img>
+      </Grid>
+    </Grid>
+    <Typography variant="h4" align="center" color={"palevioletred"}                     
+        sx={{fontSize: {xs: "20px",sm: "25px",md: "30px",lg: "35px",}, py: { xs: 2, sm: 5 }, px:{ xs: 1, sm: 5 }}}> 
+                      Meet our talented team of dentists, ready to provide exceptional care for your oral health. </Typography>
       {loading ? (
         <Typography variant="h6" align="center" color={"palevioletred"}> Loading...</Typography>
       ) : (
-        <Container sx={{py:10}}>
-
+        <Container sx={{pt:1, pb: 3}}>
           <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
           <TableRow>
+          <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>ID</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell >Email</TableCell>
-            <TableCell >Contact Number</TableCell>
-            <TableCell >Age</TableCell>
-            <TableCell >PRC Number</TableCell>
-            <TableCell >PTR Number</TableCell>
-            <TableCell >Branch</TableCell>
+            <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Email</TableCell>
+            <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Contact Number</TableCell>
+            <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>Branch</TableCell>
             <TableCell >View</TableCell>
           </TableRow>
         </TableHead>
@@ -71,31 +83,31 @@ const DentistRosario = () => {
               key={dentists.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell >{dentists.name}</TableCell>
-              <TableCell >{dentists.email}</TableCell>
-              <TableCell >+63 {dentists.contact_number}</TableCell>
-              <TableCell >{dentists.age}</TableCell>
-              <TableCell >{dentists.prc_number}</TableCell>
-              <TableCell >{dentists.ptr_number}</TableCell>
-              <TableCell >{dentists.branches}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{dentists.dentistsId}</TableCell>
+              <TableCell >{dentists.firstName} {dentists.middleName} {dentists.lastname} {dentists.prefix}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{dentists.email}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>+63 {dentists.contact_number}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{dentists.branches}</TableCell>
               <TableCell >
-                <Link to={`/Dentists/${dentists._id}`} style={{ color: 'pink'}}><VisibilityIcon /></Link>
+                <Link to={`/Dentists/public/${dentists._id}`} style={{ color: 'pink'}}><VisibilityIcon /></Link>
                 </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-    <Stack direction={"row"} spacing={4} justifyContent={"center"} sx={{mx:5, my:5}}>
-      <Link to="/dentists/new">
-    <Button  variant="outlined" color="secondary">Add New Doctor</Button>
-
-      </Link>
-            </Stack>
-    
         </Container>
       )}
+      <Grid container>
+      <Grid item md={6} sm={12} align="center" sx={{ px: 3, py: 3 }}>
+          <img src={FBpost1} alt="Progress" style={{ width: "100%", maxHeight: "700px" }}></img>
+      </Grid>
+      <Grid item md={6} sm={12} align="center" sx={{ px: 3, py: 3 }}>
+          <img src={FBpost2} alt="Progress" style={{ width: "100%", maxHeight: "700px" }}></img>
+      </Grid>
+      </Grid>
     </Container>
+    </Box>
     <FooterMUI />
     </>
   );

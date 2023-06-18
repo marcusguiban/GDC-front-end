@@ -42,13 +42,7 @@ const HomePage = () => {
   return (
     <>
       <NavbarMUI />
-      <div
-            style={{
-                backgroundColor: "rgb(246, 231, 234)",
-                transition: "background-color 0.5s ease",
-                minHeight: "100vh",
-            }}
-      >
+      <div className="background">
         <Container sx={{ px: { xs: 1, sm: 5 }, py: { xs: 1, sm: 5 }, }}>
           <Grid item sm={12}>
             <img src={HomeIMG} className="img1" alt="logo" />
@@ -64,7 +58,7 @@ const HomePage = () => {
             >Discover exceptional dental care for a radiant smile you'll adore.</Typography>
            
           </Grid>
-          <Grid container sx={{ px: { xs: 1, sm: 5 }, py: { xs: 1, sm: 5 }, alignItems: 'center' }}>
+          <Grid container sx={{ px: { xs: 1, sm: 5 }, py: { xs: 1, sm: 5 } }}>
   <Grid item sx={12} md={6}>
     <img src={Walkin} className="img1" alt="logo" style={{ width: "100%", maxWidth: "600px" }}/>
   </Grid>
@@ -141,7 +135,7 @@ const HomePage = () => {
                 <Typography variant="p"  className="link-text">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
                 </Stack>
                 <Stack>
-                <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFC0CB", color: "#FFFFFF" , fontStyle: "Arial"}}>
+                <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFC0CB", color: "#FFFFFF"}}>
                 <Typography>Panapaan</Typography>
                 </Button>
                 </Stack>
@@ -229,16 +223,16 @@ const HomePage = () => {
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <Stack direction="row" justifyContent={"center"}>
-              <Grid className="Clinics">
+              <Grid className="GDCOneLuxDental">
             <Link to="/dentists/Laspinas" className="link">
                 <Stack>
                 <img src={Panapaan1} alt="Panapaan" style={{ width: "100%", maxHeight: "300px" }}/>
                 </Stack>
                 <Stack>
-                <Typography variant="p"  className="link-text">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
+                <Typography variant="p"  className="link-text-One">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
                 </Stack>
                 <Stack>
-                <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFC0CB", color: "#FFFFFF" }}>
+                <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFD700", color: "#000000" }}>
                 <Typography>GDC One Lux Dental</Typography>
                 </Button>
                 </Stack>

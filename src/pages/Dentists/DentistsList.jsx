@@ -68,39 +68,35 @@ const DentistList = () => {
           <Container sx={{ py: 10 }}>
 
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Contact Number</TableCell>
-                    <TableCell>Branch</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {dentists.map((dentist) => (
-                    <TableRow
-                      key={dentist.id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell>{dentist.dentistsId}</TableCell>
-                      <TableCell>{dentist.firstName} {dentist.middleName} {dentist.lastname} {dentist.prefix}</TableCell>
-                      <TableCell>{dentist.email}</TableCell>
-                      <TableCell>+63 {dentist.contact_number}</TableCell>
-                      <TableCell>{dentist.branches}</TableCell>
-                      <TableCell>
-                        <Link to={`/Dentists/${dentist._id}`} style={{ color: 'pink' }}>
-                          <VisibilityIcon />
-                        </Link>
-
-                      </TableCell>
-
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+            <Table sx={{ minWidth: 200 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+          <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Email</TableCell>
+            <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Contact Number</TableCell>
+            <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>Branch</TableCell>
+            <TableCell >View</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {dentists.map((dentist) => (
+            <TableRow
+              key={dentist.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{dentist.dentistsId}</TableCell>
+              <TableCell >{dentist.firstName} {dentist.middleName} {dentist.lastname} {dentist.prefix}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{dentist.email}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>+63 {dentist.contact_number}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', sm:'table-cell',md: 'table-cell' } }}>{dentist.branches}</TableCell>
+              <TableCell >
+                <Link to={`/Dentists/${dentist._id}`} style={{ color: 'pink'}}><VisibilityIcon /></Link>
+                </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
             </TableContainer>
             <Stack direction={"row"} spacing={4} justifyContent={"center"} sx={{ mx: 5, my: 5 }}>
               <Link to="/dentists/new">

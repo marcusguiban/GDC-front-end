@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export const FooterMUI = () => {
   return (
-<AppBar position="static" style={{ background: 'pink' }} sx={{ px: 5, py: 5 }}>
+<AppBar position="static" style={{ background: '#111111' }} sx={{ px: 5, py: 5 }}>
   <Container maxWidth="xl" align="center">
     <Toolbar>
       <Grid container spacing={2}>
@@ -53,23 +53,20 @@ export const FooterMUI = () => {
               Email Us:
             </Typography>
             <Typography variant="body2" display="block" gutterBottom>
-              GuibanDentalClinic@GDC.com
-            </Typography>
-            <Typography variant="body2" display="block" gutterBottom>
-              GuibanDentalClinic@gmail.com
+              gdconeluxdental@gmail.com
             </Typography>
           </Stack>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4} sx={{ pt: 2 }} textAlign={{ xs: 'center', md: 'center' }}>
   <Typography variant="body1" display="block" color="white" gutterBottom>Social Media Links:</Typography>
   <Stack direction="row" spacing={5} color="white" justifyContent="center">
-    <Link to="https://www.facebook.com/guibandentalclinic" style={{ color: 'inherit', textDecoration: 'none' }}>
+    <Link to="https://www.facebook.com/gdconeluxdental" style={{ color: 'inherit', textDecoration: 'none' }}>
       <FacebookIcon fontSize='large'></FacebookIcon>
     </Link>
-    <Link to="https://www.instagram.com/guibandentalclinic/?hl=en" style={{ color: 'inherit', textDecoration: 'none' }}>
+    <Link to="https://www.instagram.com/gdconeluxdental" style={{ color: 'inherit', textDecoration: 'none' }}>
       <InstagramIcon fontSize='large'></InstagramIcon>
     </Link>
-    <Link to="https://www.google.com/maps/place/Guiban+Dental+Clinic+Panapaan+Branch/@14.4471907,120.9506977,17z/data=!3m1!4b1!4m6!3m5!1s0x3397cda0e3f8d9a1:0x337ae87aa24709!8m2!3d14.4471855!4d120.9532726!16s%2Fg%2F11h6q80gpk" style={{ color: 'inherit', textDecoration: 'none' }}>
+    <Link to="https://goo.gl/maps/e5X7B4gHe8VaWj2T6" style={{ color: 'inherit', textDecoration: 'none' }}>
       <MapIcon fontSize='large'></MapIcon>
     </Link>
   </Stack>

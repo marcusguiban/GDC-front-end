@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Typography, Box, Button, Stack, Container, Grid, Modal, IconButton } from "@mui/material";
 import { NavbarMUI } from "../Utilities/Navbar";
 import { FooterMUI } from "../Utilities/footer";
 import { FileCopyOutlined as FileCopyOutlinedIcon } from "@mui/icons-material"; 
-const DentistsView = () => {
+
+const DentistsViewPublic = () => {
   const { id } = useParams();
   const [dentists, setDentists] = useState({});
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const [nextId, setNextId] = useState(null);
   const [prevId, setPrevId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
-  const [profilePicture, setProfilePicture] = useState(null);
   useEffect(() => {
     let url = `http://localhost:5000/api/dentists/${id}`;
     const controller = new AbortController();
@@ -75,60 +74,6 @@ const closeModal = () => {
   setIsModalOpen(false);
   setModalImage(null);
 };
-
-  const handleProfilePictureChange = (event) => {
-    const file = event.target.files[0];
-    setProfilePicture(file);
-  };
-
-  const handleProfilePictureUpload = () => {
-    if (profilePicture) {
-      const formData = new FormData();
-      formData.append("profilePicture", profilePicture);
-
-      let url = `http://localhost:5000/api/dentists/profile-pic/${id}`;
-
-      const requestOptions = {
-        method: "PUT",
-        body: formData,
-      };
-
-      fetch(url, requestOptions)
-        .then((response) => response.json())
-        .then((json) => {
-          const updatedDentist = {
-            ...dentists,
-            profilePicture: json.profilePicture,
-          };
-          setDentists(updatedDentist);
-          setProfilePicture(null);
-        })
-        .then(() => navigate(`/dentists/${id}`))
-        .catch((error) => console.log(error));
-    }
-  };
-
-  const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this record?")) {
-      let url = `http://localhost:5000/api/dentists`;
-
-      const requestOptions = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-        }),
-      };
-
-      fetch(url, requestOptions)
-        .then(() => {
-          navigate("/dentists");
-        })
-        .catch((error) => console.log(error));
-    }
-  };
   const handleProfilePictureClick = () => {
     openModal(imgurl);
   };
@@ -142,7 +87,7 @@ const closeModal = () => {
       <NavbarMUI />
       <Box className="background">
         <Typography variant="h4" sx={{ my: 5 }} align="center" color="palevioletred">
-          Dentists Details
+        Guiban Dental Clinic {dentists.branches}
         </Typography>
         <Typography variant="h4" sx={{ my: 5 }} align="center" color="palevioletred">
           {dentists.dentistsId} <IconButton onClick={copyText}>
@@ -156,87 +101,33 @@ const closeModal = () => {
           </Typography>
         ) : (
           <Container maxWidth="sm">
+
+<Grid container spacing={2}>
+
+
+<Grid item sm={12} xs={12} md={6} textAlign={"center"}>
+
 {dentists.profilePicture && (
-  <Box textAlign="center" my={4} >
+  <Box textAlign="center" my={0} >
     <Stack direction="column" alignItems="center" spacing={2}>
       <Box onClick={handleProfilePictureClick}>
-      <img src={imgurl} alt="Profile" width={200} height={200}
+      <img src={imgurl} alt="Profile" width={300} height={300}
         style={{ borderRadius: "50%", objectFit: "cover" }}
       />
       </Box>
-
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleProfilePictureChange}
-      />
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={handleProfilePictureUpload}
-      >
-        Update Profile Picture
-      </Button>
     </Stack>
   </Box>
 )}
-
-
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">Name:</Typography>
+</Grid>
+              <Grid item sm={12} xs={12} md={6} >
+                <Stack spacing={2} sx={{pt:5, px:5}}>
                   <Typography variant="h6">{dentists.firstName} {dentists.middleName} {dentists.lastname} {dentists.prefix}</Typography>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">Email:</Typography>
                   <Typography variant="h6">{dentists.email}</Typography>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">Contact Number:</Typography>
                   <Typography variant="h6">+63 {dentists.contact_number}</Typography>
                 </Stack>
               </Grid>
-
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">Age:</Typography>
-                  <Typography variant="h6">{dentists.age}</Typography>
-                </Stack>
-              </Grid>
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">Gender:</Typography>
-                  <Typography variant="h6">{dentists.gender}</Typography>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">PRC Number:</Typography>
-                  <Typography variant="h6">{dentists.prc_number}</Typography>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">PTR Number:</Typography>
-                  <Typography variant="h6">{dentists.ptr_number}</Typography>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Stack spacing={2}>
-                  <Typography variant="h6">Branch:</Typography>
-                  <Typography variant="h6">{dentists.branches}</Typography>
-                </Stack>
-              </Grid>
+</Grid>
+            <Grid container spacing={2} sx={{pt:5, px:5}}>
               {dentists.education && (
               <Grid item xs={12}>
                 <Stack spacing={2}>
@@ -265,7 +156,7 @@ const closeModal = () => {
               <Container maxWidth="sm">
         {/* Previous Dentist Button */}
         {prevId && (
-          <Link to={`/dentists/${prevId}`}>
+          <Link to={`/dentists/public/${prevId}`}>
             <Button variant="contained" color="primary">
               Previous Dentist
             </Button>
@@ -274,7 +165,7 @@ const closeModal = () => {
 
         {/* Next Dentist Button */}
         {nextId && (
-          <Link to={`/dentists/${nextId}`}>
+          <Link to={`/dentists/public/${nextId}`}>
             <Button variant="contained" color="primary">
               Next Dentist
             </Button>
@@ -310,28 +201,6 @@ const closeModal = () => {
                       Dentist List
                     </Button>
                   </Link>
-                  <Link to={`/dentists/edit/${dentists._id}`}>
-                    <Button variant="contained" color="primary">
-                      Edit
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleDelete}
-                  >
-                    Delete
-                  </Button>
-                  <Link to="/dentists/new">
-                    <Button variant="contained" color="primary">
-                      Add
-                    </Button>
-                  </Link>
-                  <Link to={`/dentists/edit/update/${dentists._id}`}>
-                    <Button variant="contained" color="primary">
-                      Update
-                    </Button>
-                  </Link>
                 </Stack>
               </Grid>
             </Grid>
@@ -343,7 +212,5 @@ const closeModal = () => {
   );
 };
 
-export default DentistsView;
-
-
+export default DentistsViewPublic;
 

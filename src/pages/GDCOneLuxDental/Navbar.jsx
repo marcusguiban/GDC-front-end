@@ -2,7 +2,7 @@ import { AppBar, Box, Button, Container, Drawer, Hidden, IconButton, List, ListI
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, React} from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../images/navbar-logo.jpg";
+import Logo from "../../OneLuxDental/GDC-one-dental.jpg";
     
 
 export const NavbarMUI = () => {
@@ -26,9 +26,6 @@ export const NavbarMUI = () => {
       <List >
           <ListItem >
                 <img src={Logo} width="100%" height="100%" alt="post"></img> 
-        </ListItem>
-      <ListItem  component={Link} to="/login" >
-          <ListItemText secondary="Login" />
         </ListItem>
         <ListItem  component={Link} to="/dentists">
           <ListItemText secondary="Dentists" />
@@ -59,7 +56,7 @@ export const NavbarMUI = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: 'pink' }}>
+      <AppBar position="static" style={{ background: '#111111' }}>
         <Container maxWidth="xl" sx={{display:{ xs: "flex", md: "block" }, justifyContent:"center"}}>
           <Toolbar>
             <IconButton
@@ -73,16 +70,15 @@ export const NavbarMUI = () => {
             <Box sx={{ px: 5, display: { xs: "none", md: "flex" } }}>
               <img src={Logo} width="100" height="100" alt="post"></img>
             </Box>
-            <Typography variant="h6" noWrap component="a" sx={{ color: "white", textDecoration: "none", px: 1, display: { xs: "none", md: "flex" } }}>
-              <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>Guiban Dental Clinic</Link>
+            <Typography variant="h6" noWrap component="a" sx={{ color: "gold", textDecoration: "none", px: 1, display: { xs: "none", md: "flex" } }}>
+              <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>GDC One Lux Dental</Link>
             </Typography>
             <Hidden mdDown>
               <Box sx={{ display: { xs: "none", md: "flex", justifyContent: 'center' } }}>
                   <Link to="/dentists"><Button sx={{ color: "white" }}>Dentists</Button></Link>
-                  <Link to="/Patients"><Button sx={{ color: "white" }}>Patients</Button></Link>
-                  <Link to="/Appointments"><Button sx={{ color: "white" }}>Appointments</Button></Link>
-                  <Button sx={{ color: "white" }} color="inherit" onClick={handleOpenNavMenu}>Branches</Button>
-                  <Link to="/Login"><Button sx={{ color: "white" }}>Login</Button></Link>
+                  <Link to="/GDC-One-Lux-Dental/AboutUs"><Button sx={{ color: "white" }}>About Us</Button></Link>
+                  <Button sx={{ color: "white" }} color="inherit" onClick={handleOpenNavMenu}>Guiban Dental Clinics</Button>
+          
               </Box>
   
             <Menu

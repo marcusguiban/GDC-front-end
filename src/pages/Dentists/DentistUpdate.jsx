@@ -67,8 +67,7 @@ const DentistUpdate = () => {
   return (
     <>
       <NavbarMUI />
-      <div style={{ backgroundColor: "#F6E7EA", transition: "background-color 0.5s ease",minHeight: "100vh",}}
-      >
+      <div className="background">
         <Container sx={{ mt: 0, mb: 0 }} justifyContent="center">
           <Typography variant="h4" sx={{ px: 2, py: 3 }} align="center" color="palevioletred" >Update Dentists</Typography>
           <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit} sx={{ mt: 5, px: 3, py: 5, maxWidth: 500, margin: "0 auto" }}>
