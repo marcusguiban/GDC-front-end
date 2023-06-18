@@ -51,7 +51,11 @@ export const NavbarMUI = () => {
         <ListItem  component={Link} to="/Dentists/laspinas">
           <ListItemText secondary="GDC One Lux Dental" />
         </ListItem>
-        <ListItem>
+        <ListItem  component={Link} to="/patients">
+          <ListItemText secondary="Patients" />
+        </ListItem>
+        <ListItem  component={Link} to="/Appointments">
+          <ListItemText secondary="Appointments" />
         </ListItem>
       </List>
     </div>
