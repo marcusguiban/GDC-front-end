@@ -47,6 +47,7 @@ export default function Login() {
   return (
 <>
 <NavbarMUI />
+<Box className="background"> 
 <Container >
       <Typography variant="h4" sx={{px:5, py:5}} align="center"  color={"palevioletred"}>Login your Account</Typography>
       <Box component="form" onSubmit={handleLogin} >
@@ -57,17 +58,14 @@ export default function Login() {
       <Stack direction={"row"} spacing={4} justifyContent={"center"} > 
       <TextField helperText="Password" variant="standard" type="password" required  name="password" inputRef={passwordRef}/>
       </Stack>
-
       <Stack direction={"row"} spacing={4} justifyContent={"center"} >
       <Button type="submit" value="Login" variant="contained" sx={{ color: "White" }}>Login</Button>
       </Stack>
-      <Stack direction={"row"} spacing={4} justifyContent={"center"} sx={{px:5,pb:5}}>
-      <Typography variant="body1" sx={{px:5}} align="center"  color={"palevioletred"} >Not yet registered? Register here</Typography>
-      <Button type="submit" href="/register" variant="outlined">Register</Button>
-      </Stack>
+
       </Stack>
       </Box>
     </Container>
+    </Box>
 <FooterMUI />
 </>
 

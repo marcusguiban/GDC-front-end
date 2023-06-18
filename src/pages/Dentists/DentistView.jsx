@@ -305,9 +305,9 @@ const closeModal = () => {
                   justifyContent="center"
                   mt={4}
                 >
-                  <Link to="/dentists">
+                  <Link to="/Overview">
                     <Button variant="contained" color="primary">
-                      Dentist List
+                      Overview
                     </Button>
                   </Link>
                   <Link to={`/dentists/edit/${dentists._id}`}>

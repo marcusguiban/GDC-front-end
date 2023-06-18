@@ -7,7 +7,7 @@ import DentistsViewPublic from './pages/PublicPages/DentistViewPublic';
 
 import OverviewAdmin from './pages/AdminView/Overview';
 
-import DentistList from './pages/Dentists/DentistsList';
+
 import DentistCreate from './pages/Dentists/DentistCreate';
 import DentistsView from './pages/Dentists/DentistView';
 import DentistEdit from './pages/Dentists/DentistEdit';
@@ -20,7 +20,7 @@ import DentistCarmona from './pages/branches/Carmona';
 import ChangePassword from './pages/Dentists/DentistChangePassword';
 
 import DentistUpdate from './pages/Dentists/DentistUpdate';
-import PatientList from './pages/Patients/PatientList';
+
 import PatientView from './pages/Patients/PatientView';
 import PatientEdit from './pages/Patients/PatientEdit';
 import PatientCreate from './pages/Patients/PatientCreate';
@@ -30,7 +30,6 @@ import PatientChangePassword from './pages/Patients/PatientChangePassword';
 import CreateDentalChartPage from './pages/DentalCharts/DentalChartCreate';
 
 
-import AppointmentList from './pages/Appointments/AppointmentList';
 import AppointmentView from './pages/Appointments/AppointmentsView';
 import AppointmentCreate from './pages/Appointments/AppointmentCreate';
 
@@ -69,16 +68,14 @@ function App() {
        <Route path="/Dentists/edit/Change-password/:id" element={<ChangePassword />}></Route>
        <Route path="/Dentists/edit/update/:id" element={<DentistUpdate />}></Route>
        <Route path="/Dentists/:id" element={<DentistsView />}></Route>
-       <Route path="/Dentists" element={<DentistList />}></Route>
        <Route path="/Dentists/new" element={<DentistCreate />}></Route>
 
-       <Route path="/Patients" element={<PatientList />}></Route>
        <Route path="/Patients/:id" element={<PatientView />}></Route>
        <Route path="/Patients/edit/:id" element={<PatientEdit />}></Route>
        <Route path="/Patients/new" element={<PatientCreate />}></Route>
        <Route path="/Patients/edit/Change-password/:id" element={<PatientChangePassword />}></Route>
 
-       <Route path="/Appointments" element={<AppointmentList />}></Route>
+
        <Route path="/Appointments/:id" element={<AppointmentView />}></Route>
        <Route path="/Appointments/new" element={<AppointmentCreate />}></Route>
 

@@ -9,6 +9,7 @@ import Panapaan1 from "../../images/Panapaan1.jpg";
 import { Container, Grid, Stack, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import ContactUsEmailSender from "./ContactUs";
+import OneLuxDental from "../../OneLuxDental/One-Lux-Clinic1.jpg"
 const HomePage = () => {
   const image1Ref = useRef(null);
   const image2Ref = useRef(null);
@@ -152,7 +153,7 @@ const HomePage = () => {
                 <img src={Panapaan1} alt="Panapaan" style={{ width: "100%", maxHeight: "300px" }}/>
                 </Stack>
                 <Stack>
-                <Typography variant="p"  className="link-text">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
+                <Typography variant="p"  className="link-text">3rd Floor, Avon Bldg., L. 2 Blk. 3, Molino Road, Molino 3, Molino, Bacoor City, Cavite</Typography>
                 </Stack>
                 <Stack>
                 <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFC0CB", color: "#FFFFFF" }}>
@@ -172,7 +173,7 @@ const HomePage = () => {
                 <img src={Panapaan1} alt="Panapaan" style={{ width: "100%", maxHeight: "300px" }}/>
                 </Stack>
                 <Stack>
-                <Typography variant="p"  className="link-text">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
+                <Typography variant="p"  className="link-text">L.E.A Building 084, Palapala, Sampaloc 1, Dasmarinas, Cavite</Typography>
                 </Stack>
                 <Stack>
                 <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFC0CB", color: "#FFFFFF" }}>
@@ -191,7 +192,7 @@ const HomePage = () => {
                 <img src={Panapaan1} alt="Panapaan" style={{ width: "100%", maxHeight: "300px" }}/>
                 </Stack>
                 <Stack>
-                <Typography variant="p"  className="link-text">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
+                <Typography variant="p"  className="link-text">RRE Bld, Blk4 Lot 14 Costaverde Subd. Tejeros Convention Rosario, Cavite</Typography>
                 </Stack>
                 <Stack>
                 <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFC0CB", color: "#FFFFFF" }}>
@@ -210,7 +211,7 @@ const HomePage = () => {
                 <img src={Panapaan1} alt="Panapaan" style={{ width: "100%", maxHeight: "300px" }}/>
                 </Stack>
                 <Stack>
-                <Typography variant="p"  className="link-text">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
+                <Typography variant="p"  className="link-text">Lot 3 Blk 5 GF JabezTech Bldg. Macaria Business Center Carmona, Cavite</Typography>
                 </Stack>
                 <Stack>
                 <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFC0CB", color: "#FFFFFF" }}>
@@ -226,10 +227,10 @@ const HomePage = () => {
               <Grid className="GDCOneLuxDental">
             <Link to="/dentists/Laspinas" className="link">
                 <Stack>
-                <img src={Panapaan1} alt="Panapaan" style={{ width: "100%", maxHeight: "300px" }}/>
+                <img src={OneLuxDental} alt="Panapaan" style={{ width: "100%", maxHeight: "300px" }}/>
                 </Stack>
                 <Stack>
-                <Typography variant="p"  className="link-text-One">2nd floor, Fynn Commercial Complex, Panapaan 4, Bacoor, Cavite, Bacoor, Philippines</Typography>
+                <Typography variant="p"  className="link-text-One">VOR Building, No.478 Alabang Zapote Road Barangay Almanza Uno Las Pinas City (in front of Excelsior Hotel)</Typography>
                 </Stack>
                 <Stack>
                 <Button justifycontent="center" size="lg" variant="contained" style={{ backgroundColor: "#FFD700", color: "#000000" }}>

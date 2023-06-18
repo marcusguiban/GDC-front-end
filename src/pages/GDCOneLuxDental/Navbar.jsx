@@ -33,12 +33,6 @@ export const NavbarMUI = () => {
         <ListItem  component={Link} to="/AboutUs">
           <ListItemText secondary="About Us" />
         </ListItem>
-        <ListItem  component={Link} to="/Appointments">
-          <ListItemText secondary="Appointments" />
-        </ListItem>
-        <ListItem  component={Link} to="/dentists">
-          <ListItemText secondary="Dentists" />
-        </ListItem>
         <ListItem  component={Link} to="/Dentists/Panapaan">
           <ListItemText secondary="Panapaan" />
         </ListItem>

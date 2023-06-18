@@ -27,19 +27,10 @@ export const NavbarMUI = () => {
                 <img src={Logo} width="100%" height="100%" alt="post"></img> 
         </ListItem>
         <ListItem  component={Link} to="/" >
-          <ListItemText secondary="Home" />
-        </ListItem>
-        <ListItem  component={Link} to="/patients">
-          <ListItemText secondary="Patients" />
-        </ListItem>
-        <ListItem  component={Link} to="/Appointments">
-          <ListItemText secondary="Appointments" />
-        </ListItem>
-        <ListItem  component={Link} to="/dentists">
-          <ListItemText secondary="Dentists" />
+          <ListItemText secondary="Home"/>
         </ListItem>
         <ListItem  component={Link} to="/Dentists/Panapaan">
-          <ListItemText secondary="Panapaan" />
+          <ListItemText secondary="Panapaan"/>
         </ListItem>
         <ListItem  component={Link} to="/Dentists/carmona">
           <ListItemText secondary="Carmona" />
@@ -88,9 +79,7 @@ export const NavbarMUI = () => {
             </Typography>
             <Hidden mdDown>
               <Box sx={{ display: { xs: "none", md: "flex", justifyContent: 'center' } }}>
-                  <Link to="/dentists"><Button sx={{ color: "white" }}>Dentists</Button></Link>
-                  <Link to="/Patients"><Button sx={{ color: "white" }}>Patients</Button></Link>
-                  <Link to="/Appointments"><Button sx={{ color: "white" }}>Appointments</Button></Link>
+                  <Link to="/Overview"><Button sx={{ color: "white" }}>Overview</Button></Link>
                   <Button sx={{ color: "white" }} color="inherit" onClick={handleOpenNavMenu}>Branches</Button>
                   <Link to="/Login"><Button sx={{ color: "white" }}>Login</Button></Link>
               </Box>

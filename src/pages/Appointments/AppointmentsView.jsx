@@ -158,7 +158,11 @@ const AppointmentView = () => {
     </Stack>
     </Stack>
         <Stack direction={"row"} spacing={4} justifyContent={"center"} sx={{px:5, pb:10, pt:5}}>
-        <Link to="/appointments"><Button variant="contained"  sx={{ color: "White" }}>Patient List</Button></Link>
+        <Link to="/Overview">
+                    <Button variant="contained" color="primary">
+                      Overview
+                    </Button>
+                  </Link>
         <Link to={`/appointments/edit/${appointments._id}`}><Button variant="contained"  sx={{ color: "White" }}>Edit</Button></Link>
             <Button variant="contained"  sx={{ color: "White" }} onClick={handleDelete}>Delete</Button>
             <Link to="/appointments/new"><Button variant="contained"  sx={{ color: "White" }}> Add </Button></Link>

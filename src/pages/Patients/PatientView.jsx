@@ -154,9 +154,9 @@ const PatientView = () => {
                   justifyContent="center"
                   mt={4}
                 >
-                  <Link to="/patients">
+                  <Link to="/Overview">
                     <Button variant="contained" color="primary">
-                      Patient List
+                      Overview
                     </Button>
                   </Link>
                   <Link to={`/patients/edit/${patient._id}`}>
