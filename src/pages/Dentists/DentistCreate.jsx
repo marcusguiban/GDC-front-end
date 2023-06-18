@@ -68,7 +68,7 @@ const DentistCreate = () => {
       formData.append(key, value);
     });
 
-    fetch("http://localhost:5000/api/dentists", {
+    fetch("https://gdc-back-end.vercel.app/api/api/dentists", {
       method: "POST",
       body: formData,
     })

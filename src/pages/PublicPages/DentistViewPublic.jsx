@@ -14,7 +14,7 @@ const DentistsViewPublic = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
   useEffect(() => {
-    let url = `http://localhost:5000/api/dentists/${id}`;
+    let url = `https://gdc-back-end.vercel.app/api/dentists/${id}`;
     const controller = new AbortController();
     const requestOptions = {
       method: "GET",
@@ -49,7 +49,7 @@ const DentistsViewPublic = () => {
       return age;
     }
 
-    fetch('http://localhost:5000/api/dentists')
+    fetch('https://gdc-back-end.vercel.app/api/dentists')
     .then((response) => response.json())
     .then((json) => {
       const dentistIds = json.map(dentist => dentist._id);
@@ -77,7 +77,7 @@ const closeModal = () => {
   const handleProfilePictureClick = () => {
     openModal(imgurl);
   };
-  const imgurl = `http://localhost:5000/${dentists.profilePicture}`;
+  const imgurl = `https://gdc-back-end.vercel.app/${dentists.profilePicture}`;
   const copyText = () => {
     navigator.clipboard.writeText(dentists.dentistsId);
   };

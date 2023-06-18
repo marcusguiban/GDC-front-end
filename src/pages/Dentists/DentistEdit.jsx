@@ -13,7 +13,7 @@ const DentistEdit = () => {
 
 
   useEffect(() => {
-    let url = `http://localhost:5000/api/dentists/${id}`;
+    let url = `https://gdc-back-end.vercel.app/api/dentists/${id}`;
 
     const controller = new AbortController();
     const requestOptions = {
@@ -47,7 +47,7 @@ const DentistEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = `http://localhost:5000/api/dentists/`;
+    let url = `https://gdc-back-end.vercel.app/api/dentists/`;
 
     const requestOptions = {
       method: "PUT",

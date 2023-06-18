@@ -14,7 +14,7 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
 
-    let url = `${process.env.REACT_APP_API_URL}/login`;
+    let url = `https://gdc-back-end.vercel.app/api/login`;
     
 
     const requestOptions = {

@@ -18,7 +18,7 @@ const PatientEdit = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `${process.env.REACT_APP_API_URL}/patients/${id}`;
+    let url = `https://gdc-back-end.vercel.app/api/patients/${id}`;
 
     const controller = new AbortController();
 

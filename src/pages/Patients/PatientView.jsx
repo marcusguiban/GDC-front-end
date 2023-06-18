@@ -13,7 +13,7 @@ const PatientView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `http://localhost:5000/api/patients/${id}`;
+    let url = `https://gdc-back-end.vercel.app/api/patients/${id}`;
 
     const controller = new AbortController();
 

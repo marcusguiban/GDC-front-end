@@ -18,7 +18,7 @@ const AppointmentCreate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:5000/api/appointments", {
+    fetch("https://gdc-back-end.vercel.app/api/appointments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

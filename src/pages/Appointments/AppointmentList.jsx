@@ -21,7 +21,7 @@ const AppointmentList = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = 'http://localhost:5000/api/appointments';
+    let url = 'https://gdc-back-end.vercel.app/api/appointments';
 
     const requestOptions = {
       signal: controller.signal,

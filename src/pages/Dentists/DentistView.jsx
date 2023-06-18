@@ -15,7 +15,7 @@ const DentistsView = () => {
   const [modalImage, setModalImage] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
   useEffect(() => {
-    let url = `http://localhost:5000/api/dentists/${id}`;
+    let url = `https://gdc-back-end.vercel.app/api/dentists/${id}`;
     const controller = new AbortController();
     const requestOptions = {
       method: "GET",
@@ -50,7 +50,7 @@ const DentistsView = () => {
       return age;
     }
 
-    fetch('http://localhost:5000/api/dentists')
+    fetch('https://gdc-back-end.vercel.app/api/dentists')
     .then((response) => response.json())
     .then((json) => {
       const dentistIds = json.map(dentist => dentist._id);
@@ -86,7 +86,7 @@ const closeModal = () => {
       const formData = new FormData();
       formData.append("profilePicture", profilePicture);
 
-      let url = `http://localhost:5000/api/dentists/profile-pic/${id}`;
+      let url = `https://gdc-back-end.vercel.app/api/dentists/profile-pic/${id}`;
 
       const requestOptions = {
         method: "PUT",
@@ -110,7 +110,7 @@ const closeModal = () => {
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this record?")) {
-      let url = `http://localhost:5000/api/dentists`;
+      let url = `https://gdc-back-end.vercel.app/api/dentists`;
 
       const requestOptions = {
         method: "DELETE",
@@ -132,7 +132,7 @@ const closeModal = () => {
   const handleProfilePictureClick = () => {
     openModal(imgurl);
   };
-  const imgurl = `http://localhost:5000/${dentists.profilePicture}`;
+  const imgurl = `https://gdc-back-end.vercel.app/${dentists.profilePicture}`;
   const copyText = () => {
     navigator.clipboard.writeText(dentists.dentistsId);
   };

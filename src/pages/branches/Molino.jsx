@@ -21,7 +21,7 @@ const DentistMolino = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = `${process.env.REACT_APP_API_URL}/dentists/Molino`;
+    let url = `https://gdc-back-end.vercel.app/api/dentists/Molino`;
 
     const requestOptions = {
       signal: controller.signal,

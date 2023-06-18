@@ -22,7 +22,7 @@ const DentistList = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    let url = 'http://localhost:5000/api/dentists';
+    let url = `https://gdc-back-end.vercel.app/api/dentists`;
 
     const requestOptions = {
       signal: controller.signal,

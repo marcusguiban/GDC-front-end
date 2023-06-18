@@ -14,7 +14,7 @@ const AppointmentView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = `http://localhost:5000/api/appointments/${id}`;
+    let url = `https://gdc-back-end.vercel.app/api/appointments/${id}`;
 
     const controller = new AbortController();
 

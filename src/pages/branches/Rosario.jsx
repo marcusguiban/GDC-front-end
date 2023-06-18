@@ -19,7 +19,7 @@ const DentistRosario = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const controller = new AbortController();
-    let url = `${process.env.REACT_APP_API_URL}/dentists/Rosario`;
+    let url = `https://gdc-back-end.vercel.app/api/dentists/Rosario`;
     const requestOptions = {
       signal: controller.signal,
       method: "GET"};
